@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div id="main">
+
+        <div id="name-container" class="container">
+            <h3>Producto o servico unitario del cual se calculará el costo</h3>
+            <input id="product-name" type="text" placeholder="Nombre del producto o servicio">
+            
+            <div class="btn-group" id="btns-prorrateo">
+                <button onclick="confirmName()">Asignar nombre</button>
+            </div>
+        </div>    
+
+        <div id="supply-container" class="container">
+            <h3 id="supply-header">Insumos directos aplicados al producto o servicio </h3>
+            <!-- Tabla de insumos -->
+            <div class="table-wrapper">
+                <table id="tabla-insumos">
+                    <tr>
+                        <th id="number">No</td>
+                        <th id="description">Descripción</td>
+                        <th id="unit">Se compra por</td>
+                        <th id="price">Precio por unidad</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="btn-group" id="btns-insumos">
+                <button onclick="newRow()">Nuevo insumo</button>
+                <button onclick="confirmSupply()">Confirmar insumos</button>
+                <button onclick="back1()">Volver</button>
+            </div>
+
+        </div>
+
+        <div id="distribution-container" class="container">
+            <h3 id="distribution-header">Distribucion de costos de insumos de acuerdo a su uso en los productos o servicios</h3>
+
+            <div class="table-wrapper">
+                <table id="tabla-prorrateo">
+                    <tr>
+                        <th id="number">No</td>
+                        <th id="supply">Insumo</td>
+                        <th id="amount">Cantidad</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="btn-group" id="btns-prorrateo">
+                <button onclick="confirmDistribution(), openModal()">Confirmar distribuciones</button>
+                <button onclick="back2()">Volver</button>
+            </div>
+
+        </div>
+
+        <div class="container" id="investment-container">
+            <h3>Inversión requerida en activos</h3>
+            <div class="table-wrapper">
+                <table id="">
+                    <tr>
+                        <th>No</th>
+                        <th>Descripción</th>
+                        <th>Valor</th>
+                        <th>Años de vida útil</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>1</td>
+                        <td><input type="text" value="Computadora"></td>
+                        <td><input type="number" min="0" value="60000"></td>
+                        <td><input type="number" min="0" value="5"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal" id="costeo">
+        <div class="modal-content">
+            <div><span class="close">&times;</span></div>
+            
+            <div>
+                <h3>Costeo</h3>
+
+                <div class="table-wrapper">
+                    <table id="tabla-costeo">
+                        <tr>
+                            <th>No</th>
+                            <th>Insumo</th>
+                            <th>Cantidad</th>
+                            <th>Unidad</th>
+                            <th>Costo</th>
+                        </tr>
+                        
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+<!-- <script src="js/table2json.js"></script> -->
+<script src="../src/js/generatePDF.js"></script>
+<script src="../src/js/tableInputs.js"></script>
+<script src="../src/js/step-control.js"></script>
+
+</html>
