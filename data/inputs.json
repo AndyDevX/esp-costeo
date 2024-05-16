@@ -1,0 +1,23 @@
+[
+    {
+        "number": "1",
+        "description": "Harina",
+        "unit": "Kilogramo",
+        "price": "34.52",
+        "amount": "2"
+    },
+    {
+        "number": "2",
+        "description": "Huevos",
+        "unit": "Pieza",
+        "price": "13.23",
+        "amount": "0.25"
+    },
+    {
+        "number": "3",
+        "description": "Leche",
+        "unit": "Litro",
+        "price": "26.31",
+        "amount": "1"
+    }
+]
