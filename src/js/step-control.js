@@ -5,7 +5,6 @@ var json;
 var name_container = document.getElementById('name-container');
 var supply_container = document.getElementById('supply-container');
 var distribution_container = document.getElementById('distribution-container');
-var investment_container = document.getElementById('investment-container');
 
 function disableContainer (container) {
     var inputs = container.getElementsByTagName('input');
@@ -48,7 +47,6 @@ function enableContainer (container) {
 //Inicializamos
 disableContainer(supply_container);
 disableContainer(distribution_container);
-disableContainer(investment_container);
 
 //Añadimos la secuencia en orden (1 -> 2 -> 3)
     //Acción al pulsar el único botón del contenedor 1, para pasar al contenedor 2
