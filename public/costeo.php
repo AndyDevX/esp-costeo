@@ -10,7 +10,7 @@
     <div id="main">
 
         <div id="name-container" class="container">
-            <h3>Producto o servico unitario del cual se calculará el costo</h3>
+            <h1>Producto o servico unitario del cual se calculará el costo</h1>
             <input id="product-name" type="text" placeholder="Nombre del producto o servicio">
             
             <div class="btn-group" id="btns-prorrateo">
@@ -19,7 +19,7 @@
         </div>    
 
         <div id="supply-container" class="container">
-            <h3 id="supply-header">Insumos directos aplicados al producto o servicio </h3>
+            <h1 id="supply-header">Insumos directos aplicados al producto o servicio </h1>
             <!-- Tabla de insumos -->
             <div class="table-wrapper">
                 <table id="tabla-insumos">
@@ -41,7 +41,7 @@
         </div>
 
         <div id="distribution-container" class="container">
-            <h3 id="distribution-header">Distribucion de costos de insumos de acuerdo a su uso en los productos o servicios</h3>
+            <h1 id="distribution-header">Distribucion de costos de insumos de acuerdo a su uso en los productos o servicios</h1>
 
             <div class="table-wrapper">
                 <table id="tabla-prorrateo">
@@ -59,6 +59,9 @@
             </div>
 
         </div>
+
+        <button onclick="back('../index.html')" class="back-btn">Volver</button>
+
     </div>
 
 
@@ -68,7 +71,7 @@
             <div><span class="close">&times;</span></div>
             
             <div>
-                <h3>Costeo</h3>
+                <h1>Costeo</h1>
 
                 <div class="table-wrapper">
                     <table id="tabla-costeo">
@@ -93,5 +96,6 @@
 <script src="../src/js/generatePDF.js"></script>
 <script src="../src/js/tableInputs.js"></script>
 <script src="../src/js/step-control.js"></script>
+<script src="../src/js/back.js"></script>
 
 </html>

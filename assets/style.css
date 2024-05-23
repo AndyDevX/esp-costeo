@@ -19,7 +19,7 @@ body {
     padding: 0 20px;
 }
 
-h3 {
+h1 {
     text-align: center;
 }
 
@@ -110,4 +110,12 @@ input, select {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+
+
+.back-btn {
+    width: 30%;
+    height: 35px;
+    margin: 0 auto;
 }
