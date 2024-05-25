@@ -21,3 +21,27 @@ esp-costeo/
 ├─login.html *Esta es la página donde el usuario puede registrarse o iniciar sesión*
 |
 └─menu.html *Esta es la página donde se navega entre los diferentes módulos*
+
+# esp-costeo
+esp-costeo/
+|
+├─ assets/
+│   ├─ style.css
+│   respond with script.js
+|
+├─ data/
+|
+├─ docs/
+|
+├─ public/
+|
+├─ src/
+│   ├─ js/
+│   │   ├─ script.js
+│   │
+│   └─ php/
+|
+├─ index.html
+├─ login.html
+├─ menu.html
+└─ simulator.html (the HTML file you provided)
