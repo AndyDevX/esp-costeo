@@ -1,3 +1,10 @@
+/*
+    AGREGAR COMPROBACIÓN:
+    SI SE ELIGE 'Trabajador'
+    generar distribución extra 'Seguridad social e impuestos'
+    Agregar notas con la descripción
+*/
+
 let number = 0;
 const units = ['Kilogramo', 'Pieza', 'Litro', 'Metro', 'Hora', 'Unidad', 'Costal', 'Paquete', 'Bote', 'Lata', 'Bolsa', 'Tambor', 'Caja', 'Botella', 'Día', 'Semana', 'Turno', 'Kit', 'Lote'];
 

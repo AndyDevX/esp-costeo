@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador de costeo</title>
-    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
     <div id="main">
@@ -60,13 +60,14 @@
 
         </div>
 
-        <button onclick="back('../index.html')" class="back-btn">Volver</button>
+        <button onclick="back('../../index.html')" class="back-btn">Volver</button>
 
     </div>
 
 
 
     <div class="modal" id="costeo">
+        <!-- Agregar total de costo por producto -->
         <div class="modal-content">
             <div><span class="close">&times;</span></div>
             
@@ -93,9 +94,9 @@
 
 </body>
 
-<script src="../src/js/generatePDF.js"></script>
-<script src="../src/js/tableInputs.js"></script>
-<script src="../src/js/step-control.js"></script>
-<script src="../src/js/back.js"></script>
+<script src="../../src/js/generatePDF.js"></script>
+<script src="../../src/js/tableInputs.js"></script>
+<script src="../../src/js/step-control.js"></script>
+<script src="../../src/js/back.js"></script>
 
 </html>
