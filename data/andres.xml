@@ -1,7 +1,6 @@
 <?xml version = "1.0" encoding = "UTF-8"?> <!-- Declaración de archivo XML -->
 
 <libreria>
-
     <libro categoria = "suspenso">
         <autor>Stephen King</autor>
         <titulo>El resplandor</titulo>
