@@ -1,0 +1,22 @@
+<?xml version = "1.0" encoding = "UTF-8"?> <!-- Declaración de archivo XML -->
+
+<libreria>
+
+    <libro categoria = "suspenso">
+        <autor>Stephen King</autor>
+        <titulo>El resplandor</titulo>
+        <año>1977</año>
+    </libro>
+    
+    <libro categoria = "suspenso">
+        <autor>Stephen King</autor>
+        <titulo>Cementerio de mascotas</titulo>
+        <año>1983</año>
+    </libro>
+
+    <libro categoria = "narrativo">
+        <autor>Dan Brown</autor>
+        <titulo>Ángeles y Demonios</titulo>
+        <año>2000</año>
+    </libro>
+</libreria>
