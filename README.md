@@ -1,47 +1,12 @@
 # esp-costeo
 
-esp-costeo/
-|
-├─assets/ *Aquí se almacenan los recursos visuales y estilos usados directamente en el sitio*
-|
-├─data/ *Aquí se almacenan archivos referentes al resguardo de datos e información*
-|
-├─docs/ *Aquí se almacena documentación, esquemas, notas, etc.*
-|
-├─public/ *Aquí se almacenan los archivos que contienen aquello que será visible por el usuario*
-|
-├─src/ *Aquí se almacenan archivos y scripts que contienen las funcionalidades del sitio*
-    |
-|   ├─js/ *Scripts de JavaScript*
-|   |
-|   └─php/ *Funcionalidades en PHP*
-|
-├─index.html *Esta es la página principal del sitio, donde se recibe y dirige al usuario*
-|
-├─login.html *Esta es la página donde el usuario puede registrarse o iniciar sesión*
-|
-└─menu.html *Esta es la página donde se navega entre los diferentes módulos*
+### Descripción
 
-# esp-costeo
-esp-costeo/
-|
-├─ assets/
-│   ├─ style.css
-│   respond with script.js
-|
-├─ data/
-|
-├─ docs/
-|
-├─ public/
-|
-├─ src/
-│   ├─ js/
-│   │   ├─ script.js
-│   │
-│   └─ php/
-|
-├─ index.html
-├─ login.html
-├─ menu.html
-└─ simulator.html (the HTML file you provided)
+Aplicación web que permite realizar calculos financieros y contables, introduciendo pocos datos, y devolviendo proyecciones completas
+
+### Autores
+* Andres Ayuso - Codesarrollador
+* Eric Soancatl - Codesarrollador
+
+
+### Soporte
