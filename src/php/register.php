@@ -14,7 +14,7 @@
         sendVerificationEmail($email, $token);
         echo "Registro exitoso. Por favor revisa tu bandeja de entrada para verificar la cuenta.";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: ";
     }
     
     $conn->close();

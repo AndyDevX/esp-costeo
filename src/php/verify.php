@@ -12,7 +12,7 @@ if ($result->num_rows > 0) {
     if ($conn->query($update_query) === TRUE) {
         echo "Correo verificado exitosamente.";
     } else {
-        echo "Error: " . $conn->error;
+        echo "Error: ";
     }
 } else {
     echo "Token invalido.";
