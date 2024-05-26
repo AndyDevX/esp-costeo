@@ -102,9 +102,6 @@ html, body {
 
 <body>
 
-
-
-
     <div class="signup-container">
         <div id="box">
             <div id="signup-header">
@@ -114,12 +111,15 @@ html, body {
         
             
             <div id="signup-body">
-                <input type="text" placeholder="Usuario">
-                <input type="text" placeholder="Correo electrónico">
-                <input type="text" placeholder="Contraseña">
+                <form action="src/php/register.php" method="post">
+                    <input name="username" type="text" placeholder="Usuario">
+                    <input name="email" type="email" placeholder="Correo electrónico">
+                    <input name="password" type="password" placeholder="Contraseña">
     
-                <button>Crear cuenta</button>
+                    <button type="submit">Crear cuenta</button>
+                </form>
             </div>
+
         </div>
     </div>
 
