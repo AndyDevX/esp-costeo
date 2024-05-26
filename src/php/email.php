@@ -24,7 +24,7 @@ function sendVerificationEmail($userEmail, $token) {
         // Contenido del correo
         $mail->isHTML(true);
         $mail->Subject = 'Verificación de correo';
-        $mail->Body    = 'Click <a href="http://localhost/esp-costeo/src/php/verify.php?token=' . $token . '">here</a> to verify your email.';
+        $mail->Body    = 'Click <a href="https://pruebas.grupomapsen.com.mx/esp-costeo/src/php/verify.php?token=' . $token . '">here</a> to verify your email.';
 
         $mail->send();
         echo 'Correo de verificación enviado';
