@@ -15,7 +15,7 @@ html, body {
 }
 
 /* Contenedor principal centrado */
-.signup-container {
+.container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,7 +31,7 @@ html, body {
 }
 
 /* Estilo para el encabezado */
-#signup-header {
+#header {
     text-align: left;
     width: 100%;
     max-width: 400px;
@@ -40,7 +40,7 @@ html, body {
 }
 
 /* Estilo para el cuerpo del formulario */
-#signup-body {
+#body {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,7 +49,7 @@ html, body {
 }
 
 /* Estilo para los campos de entrada */
-#signup-body input {
+#body input {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -59,7 +59,7 @@ html, body {
 }
 
 /* Estilo para el botón */
-#signup-body button {
+#body button {
     width: 100%;
     padding: 10px;
     margin-top: 20px;
@@ -72,18 +72,18 @@ html, body {
 }
 
 /* Cambia el color del botón al pasar el cursor */
-#signup-body button:hover {
+#body button:hover {
     background-color: #14127e;
 }
 
 /* Enlace de iniciar sesión */
-#signup-header a {
+#header a {
     color: #5b58ff;
     text-decoration: none;
     font-weight: 600;
 }
 
-#signup-header a:hover {
+#header a:hover {
     text-decoration: underline;
 }
 
@@ -102,19 +102,20 @@ html, body {
 
 <body>
 
-    <div class="signup-container">
+    <div class="container">
         <div id="box">
-            <div id="signup-header">
+            <div id="header">
                 <h1>Crear cuenta nueva</h1>
-                <p>¿Ya tienes una cuenta? <a href="#">Iniciar sesión</a></p>
+                <p>¿Ya tienes una cuenta? <a onclick="toggle_content()">Iniciar sesión</a></p>
             </div>
         
             
-            <div id="signup-body">
-                <form action="src/php/register.php" method="post">
+            <div id="body">
+                <form action="src/php/register.php" method="post" id="form">
                     <input name="username" type="text" placeholder="Usuario">
                     <input name="email" type="email" placeholder="Correo electrónico">
                     <input name="password" type="password" placeholder="Contraseña">
+                    <input name="confirm_password" type="password" placeholder="Confirmar contraseña">
     
                     <button type="submit">Crear cuenta</button>
                 </form>
@@ -124,7 +125,7 @@ html, body {
     </div>
 
 
-
+    <script src="src/js/toggle_login.js"></script>
 
 </body>
 </html>
