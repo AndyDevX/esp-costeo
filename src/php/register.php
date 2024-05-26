@@ -3,7 +3,7 @@
     require 'email.php';
     require 'vendor/autoload.php';
     
-    $username = $_POST['usernmae'];
+    $username = $_POST['username'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $token = bin2hex(random_bytes(50));
