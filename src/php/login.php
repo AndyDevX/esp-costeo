@@ -1,4 +1,5 @@
-<?php 
+<?php
+    session_start ();
     include("conexion.php");
 
     if ($_SERVER ["REQUEST_METHOD"] == "POST") {
@@ -7,13 +8,13 @@
         $password = $connection -> real_escape_string (trim ($_POST ["password"]));
 
         // Comprobar existencia del usuario usando una consulta preparada
-        $stmt = $connection -> prepare ("SELECT * FROM users WHERE username = ?");
-        $stmt -> bind_param ("s", $username);
-        $stmt -> execute ();
-        $result_check_user = $stmt -> get_result ();
+        $statement = $connection -> prepare ("SELECT id, username, password FROM users WHERE username = ?");
+        $statement -> bind_param ("s", $username);
+        $statement -> execute ();
+        $result_check_user = $statement -> get_result ();
 
         if ($result_check_user -> num_rows <= 0) {
-            echo "Usuario no encontrado";
+            echo "<script>alert ('Usuario no encontrado.');history.back();</script>";
         } else {
             // Fetch the user data
             $user_data = $result_check_user -> fetch_assoc ();
@@ -21,12 +22,17 @@
 
             // Verificar la contraseña ingresada contra el hash almacenado
             if (password_verify ($password, $stored_hash)) {
-                echo "Inicio de sesión correcto";
+                // Inicio de sesión correcto
+                $_SESSION ['loggedin'] = true;
+                $_SESSION ['id'] = $user_data ['id'];
+                $_SESSION ['username'] = $user_data ['username'];
+                header ("location: welcome.php");
+                exit;
             } else {
-                echo "La contraseña es incorrecta";
+                echo "<script>alert ('La contraseña es incorrecta.');history.back();</script>";
             }
         }
-        $stmt -> close ();
+        $statement -> close ();
     }
 
     $connection -> close ();

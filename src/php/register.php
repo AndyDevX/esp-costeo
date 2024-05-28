@@ -11,7 +11,7 @@
 
         // Comparar contraseñas
         if ($password !== $password_confirmation) {
-            echo "Las contraseñas no coinciden";
+            echo "<script>alert ('¡Las contraseñas no coinciden!');history.back();</script>";
         } else {
             $encrypted_password = password_hash ($password, PASSWORD_DEFAULT);
 
@@ -22,7 +22,7 @@
             $result_check_email = $statement -> get_result ();
 
             if ($result_check_email -> num_rows > 0) {
-                echo "Este correo ya está en uso";
+                echo "<script>alert ('¡Este correo ya está en uso!');history.back();</script>";
             } else {
                 // Generar código de seguridad
                 $security_code = bin2hex (random_bytes (16)); // Random
@@ -33,7 +33,7 @@
                 $statement -> bind_param ("ssss", $username, $email, $encrypted_password, $encrypted_security_code);
 
                 if ($statement -> execute ()) {
-                    echo "Registro exitoso.";
+                    echo "<script>alert ('Registro exitoso.');history.back();</script>";
                     /*
                     // Detalles del correo de confirmación
                     $subject = "Verificación de cuenta";
@@ -47,7 +47,7 @@
                     }
                     */
                 } else {
-                    echo "Error durante el registro. Por favor, inténtalo de nuevo.";
+                    echo "<script>alert ('Error durante el registro. Por favor, inténtalo de nuevo.');history.back();</script>";
                 }
             }
             $statement -> close ();
