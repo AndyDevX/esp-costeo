@@ -4,10 +4,10 @@
 
     // Verificar el envío del formulario
     if ($_SERVER ["REQUEST_METHOD"] == "POST") {
-        $username = $connection -> real_escape_string ($_POST ["username"]);
-        $email = $connection -> real_escape_string ($_POST ["email"]);
-        $password = $connection -> real_escape_string ($_POST ["password"]);
-        $password_confirmation = $connection -> real_escape_string ($_POST['confirm_password']);
+        $username = $connection -> real_escape_string (trim ($_POST ["username"]));
+        $email = $connection -> real_escape_string (trim ($_POST ["email"]));
+        $password = $connection -> real_escape_string (trim ($_POST ["password"]));
+        $password_confirmation = $connection -> real_escape_string (trim ($_POST['confirm_password']));
 
         // Comparar contraseñas
         if ($password !== $password_confirmation) {
@@ -16,8 +16,10 @@
             $encrypted_password = password_hash ($password, PASSWORD_DEFAULT);
 
             // Comprobar disponibilidad de correo
-            $sql_check_email = "SELECT * FROM users WHERE email = '$email'";
-            $result_check_email = $connection -> query ($sql_check_email);
+            $statement = $connection -> prepare ("SELECT * FROM users WHERE email = ?");
+            $statement -> bind_param ("s", $email);
+            $statement -> execute ();
+            $result_check_email = $statement -> get_result ();
 
             if ($result_check_email -> num_rows > 0) {
                 echo "Este correo ya está en uso";
@@ -27,9 +29,10 @@
                 $encrypted_security_code = password_hash ($security_code, PASSWORD_DEFAULT); // Hasheo del código
 
                 // Construcción de la inserción
-                $query = "INSERT INTO users (username, email, password, security_code) VALUES ('$username', '$email', '$encrypted_password', '$encrypted_security_code')";
+                $statement = $connection -> prepare ("INSERT INTO users (username, email, password, security_code) VALUES (?, ?, ?, ?)");
+                $statement -> bind_param ("ssss", $username, $email, $encrypted_password, $encrypted_security_code);
 
-                if ($connection -> query ($query) === TRUE) {
+                if ($statement -> execute ()) {
                     echo "Registro exitoso.";
                     /*
                     // Detalles del correo de confirmación
@@ -44,9 +47,10 @@
                     }
                     */
                 } else {
-                    echo "Error: " . $query . "<br>" . $connection -> error;
+                    echo "Error durante el registro. Por favor, inténtalo de nuevo.";
                 }
             }
+            $statement -> close ();
         }
     }
 
