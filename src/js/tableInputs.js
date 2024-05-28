@@ -6,7 +6,7 @@
 */
 
 let number = 0;
-const units = ['Kilogramo', 'Pieza', 'Litro', 'Metro', 'Hora', 'Unidad', 'Costal', 'Paquete', 'Bote', 'Lata', 'Bolsa', 'Tambor', 'Caja', 'Botella', 'Día', 'Semana', 'Turno', 'Kit', 'Lote'];
+const units = ['Kilogramo', 'Pieza', 'Litro', 'Metro', 'Unidad', 'Costal', 'Paquete', 'Bote', 'Lata', 'Bolsa', 'Tambor', 'Caja', 'Botella', 'Día', 'Kit', 'Lote'];
 
 function newRow () {
     var table = document.getElementById('tabla-insumos');

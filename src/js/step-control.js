@@ -82,18 +82,43 @@ function confirmName() {
         table.innerHTML = '';
     
         var name = document.getElementById('product-name').value;
+
+        var rowIndex = 0;
+
+        json.forEach (function(insumo, index) {
+            if (insumo.unit === "Día") {
+                let newObject = {
+                    "number": null,
+                    "description": "Seguridad e impuestos - "+insumo.description,
+                    "unit": insumo.unit,
+                    "price": "",
+                    "amount": insumo.description
+                };
+
+                json.push (newObject);
+            }
+        });
+
+        console.log (json);
     
         json.forEach(function(insumo, index) {
             var row = table.insertRow();
             var numeroCell = row.insertCell(0);
             var descripcionCell = row.insertCell(1);
             var cantidadCell = row.insertCell(2);
-    
-            numeroCell.innerHTML = index + 1;  // Ajuste para mostrar el número correcto
-            descripcionCell.innerHTML = "¿Para cuántos " + name.toLowerCase() + " alcanza cada " + insumo.unit.toLowerCase() + " de " + insumo.description.toLowerCase() + "?";
-            cantidadCell.innerHTML = '<input type="number" min="0" step="1"/>';
+
+            
+            if (insumo.number !== null) {
+                console.log("coincidencia");
+                numeroCell.innerHTML = index + 1;  // Ajuste para mostrar el número correcto
+                descripcionCell.innerHTML = "¿Para cuántos " + name.toLowerCase() + " alcanza cada " + insumo.unit.toLowerCase() + " de " + insumo.description.toLowerCase() + "?";
+                cantidadCell.innerHTML = '<input type="number" min="0" step="1"/>';
+            } 
+            
         });
 
+        console.log(json);
+        
         disableContainer(supply_container);
         enableContainer(distribution_container);
     }
@@ -212,7 +237,10 @@ function confirmName() {
             table.deleteRow(1);
         }
 
+        var previousItems = [];
+
         jsonData.forEach(function(item) {
+
             // Crear una nueva fila
             var row = table.insertRow();
     
@@ -224,10 +252,28 @@ function confirmName() {
             var cellCost = row.insertCell(4);
 
             // Asignar los valores del JSON a las celdas
-            cellNo.textContent = item.number;
-            cellInput.textContent = item.description;
-            cellAmount.textContent = (1 / item.amount).toFixed(3);
-            cellUnit.textContent = item.unit;
-            cellCost.textContent = "$ " + (1/item.amount * item.price).toFixed(2);
+
+            if (item.number == null) { // Impuestos y seguridad
+
+                cellNo.textContext = "";
+                cellInput.textContent = item.description;
+                cellAmount.textContent = "";
+                cellUnit.textContent = item.unit;
+
+                for (var i = 0; i < previousItems.length; i++) {
+                    if (previousItems[i].description == item.amount) {
+                        cellCost.textContent = "$ " + ((1/previousItems[i].amount * previousItems[i].price) * 0.35).toFixed(2);
+                    }
+                }
+
+            } else {
+                cellNo.textContent = item.number;
+                cellInput.textContent = item.description;
+                cellAmount.textContent = (1 / item.amount).toFixed(3);
+                cellUnit.textContent = item.unit;
+                cellCost.textContent = "$ " + (1/item.amount * item.price).toFixed(2);
+
+                previousItems.push(item);
+            }
         });
     }
