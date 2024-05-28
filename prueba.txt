@@ -12,6 +12,9 @@ git add .
 git commit -a -m "mensaje"
     Confirmar la modificación de los archivos en el registro
 
+git commit -a --allow-empty-message -m ""
+    Confirmar la modificación de los archivos en el registro, sin ningún mensaje
+
 git push
     Enviar los cambios al repositorio principal
 
