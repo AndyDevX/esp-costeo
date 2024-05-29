@@ -1,3 +1,7 @@
+<?php
+    include ("../../src/php/session_check.php");
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
