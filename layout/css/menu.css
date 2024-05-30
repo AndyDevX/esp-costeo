@@ -28,10 +28,13 @@ body, html {
 /* Contendedor principal */
 .custom-container {
     background-color: rgba(40, 40, 40, 0.7); /* Fondo oscuro semi-transparente */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 30px;
     margin: 50px auto;
     max-width: 700px;
     color: white;
+    border-radius: 10px;
 
     /* Logo */
     img {
@@ -64,10 +67,10 @@ body, html {
 /* Contenedor para las tarjetas */
 .card-list-container {
     height: auto;
-    border: 1px solid black;
     display: flex;
     overflow-x: auto;
     gap: 10px;
+    margin-bottom: 2rem;
 }
 
 /* Tarjetas */
@@ -76,11 +79,21 @@ body, html {
     height: auto;
     text-align: center;
     background-color: #3d3d3d;
-    border-right: solid black 1px;
+
+    border-radius: 5px;
+
+    .img-container {
+        height: 7rem;
+        overflow-y: hidden;
+        align-content: center;
+
+        border-radius: 5px;
+    }
 
     img {
         width: 100%;
         height: auto;
+        
     }
     
     button {
