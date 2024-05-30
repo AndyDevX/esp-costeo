@@ -1,7 +1,6 @@
 # e-SP
 
 ### Descripción
-
 Aplicación web que permite realizar calculos financieros y contables, introduciendo pocos datos, y devolviendo proyecciones completas.
 
 ### Autores
