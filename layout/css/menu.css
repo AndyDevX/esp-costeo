@@ -18,7 +18,7 @@ body, html {
 
 /* Fondo */
 .bg-image {
-    background-image: url("../img/gtr_bg.jpg");
+    background-image: url("../img/ae86_bg.jpg");
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -83,7 +83,8 @@ body, html {
     border-radius: 5px;
 
     .img-container {
-        height: 7rem;
+        width: 100%;
+        height: auto; 
         overflow-y: hidden;
         align-content: center;
 
