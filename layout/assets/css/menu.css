@@ -102,3 +102,17 @@ body, html {
         background-color: rgb(53, 51, 204);
     }
 }
+
+@media (max-width: 576px) {
+    .custom-container {
+        max-width: 300px;
+    }
+
+    .card-list-container {
+        max-width: 300px;
+    }
+
+    .box {
+        min-width: 7rem;
+    }
+}
