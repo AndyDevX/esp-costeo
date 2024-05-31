@@ -19,11 +19,13 @@ body, html {
 
 /* Fondo */
 .bg-image {
-    background-image: url("../img/gtr_bg.jpg");
+    background-image: url("../../assets/img/gtr_bg.jpg");
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+
+    overflow-y: scroll;
 }
 
 /* Contendedor principal */
@@ -33,7 +35,7 @@ body, html {
     -webkit-backdrop-filter: blur(10px);
     padding: 30px;
     margin: 50px auto;
-    max-width: 700px;
+    max-width: 900px;
     color: white;
     border-radius: 10px;
 
@@ -65,49 +67,19 @@ body, html {
     }
 }
 
-/* Contenedor para las tarjetas */
-.card-list-container {
-    height: auto;
-    display: flex;
-    overflow-x: auto;
-    gap: 10px;
-    margin-bottom: 2rem;
-}
+.input-table {
+    width: 100%;
+    background-color: rgb(61, 61, 61);
 
-/* Tarjetas */
-.box {
-    min-width: 13rem;
-    height: auto;
-    text-align: center;
-    background-color: #3d3d3d;
-    margin-bottom: 10px;
-    border-radius: 5px;
+    tr {
+        border: solid 1px rgb(104, 104, 104);
 
-    .img-container {
-        width: 100%;
-        height: auto; 
-        overflow-y: hidden;
-        align-content: center;
-        margin-bottom: 10px;
-        border-radius: 5px;
-    }
+        th {
+            border: solid 1px rgb(104, 104, 104);
+        }
 
-    img {
-        width: 100%;
-        height: auto;
-    }
-}
-
-@media (max-width: 576px) {
-    .custom-container {
-        max-width: 300px;
-    }
-
-    .card-list-container {
-        max-width: 300px;
-    }
-
-    .box {
-        min-width: 7rem;
+        td {
+            border: solid 1px rgb(104, 104, 104);
+        }
     }
 }
