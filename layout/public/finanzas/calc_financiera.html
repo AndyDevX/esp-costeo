@@ -15,81 +15,139 @@
 <body>
     <div class="bg-image d-flex justify-content-center align-items-center">
         <div class="custom-container text-center">
-            <p class="h1 mb-3" id="form-title">Calculadora financiera</p>
 
-            <div class="row">
-                <p>Costeo</p>
+            <div class="content">
+                <p class="h1 mb-3" id="form-title">Calculadora financiera</p>
+                <hr>
 
-                <div>
-                    <p>Producto o servico unitario del cual se calculará el costo</p>
-                    <input type="text" placeholder="Nombre del producto o servicio">
-                    <button>Asignar nombre</button>
-                </div>
+                <div class="row">
+                    <p class="h2">Costeo</p>
 
-                <div>
-                    <p>Insumos directos aplicados al producto o servicio</p>
-                    <table class="input-table">
-                        <tr>
-                            <th>#</th>
-                            <th>Descripción</th>
-                            <th>Se compra por</th>
-                            <th>Precio por unidad</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Leche</td>
-                            <td>Litro</td>
-                            <td>20.34</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Harina</td>
-                            <td>Kilogramo</td>
-                            <td>42.12</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>
-                                <input type="text" placeholder="Insumo">
-                            </td>
-                            <td><select><option>Unidad</option></select></td>
-                            <td><input type="number" placeholder="Precio por unidad"></td>
-                        </tr>
-                    </table>
-                    <div class="btn-group">
-                        <button>Nuevo insumo</button>
-                        <button>Confirmar insumos</button>
-                        <button>Volver</button>
+                    <div>
+                        <p class="h4 mt-4">Producto o servico unitario del cual se calculará el costo</p>
+                        <input type="text" placeholder="Nombre del producto o servicio">
+                        <button class="btn btn-primary">Asignar nombre</button>
                     </div>
-                </div>
-
-                <div>
-                    <p>Distribucion de costos de insumos de acuerdo a su uso en los productos o servicios</p>
-                    <table>
-                        <tr>
-                            <th>#</th>
-                            <th>Insumo</th>
-                            <th>Cantidad</th>
-                        </tr>
-                    </table>
-                    <div class="btn-group">
-                        <button>Confirmar distribuciones</button>
-                        <button>Volver</button>
+                    
+                    <div>
+                        <p class="h4 mt-4">Insumos directos aplicados al producto o servicio</p>
+                        <table class="input-table">
+                            <tr>
+                                <th class="columna1">#</th>
+                                <th class="columna2">Descripción</th>
+                                <th class="columna3">Se compra por</th>
+                                <th class="columna4">Precio por unidad</th>
+                            </tr>
+                            <tr>
+                                <td class="columna1">1</td>
+                                <td class="columna2">Leche</td>
+                                <td class="columna3">Litro</td>
+                                <td class="columna4">20.34</td>
+                            </tr>
+                            <tr>
+                                <td class="columna1">2</td>
+                                <td class="columna2">Harina</td>
+                                <td class="columna3">Kilogramo</td>
+                                <td class="columna4">42.12</td>
+                            </tr>
+                            <tr>
+                                <td class="columna1">3</td>
+                                <td class="columna2">
+                                    <input type="text" placeholder="Insumo">
+                                </td>
+                                <td class="columna3"><select><option>Unidad</option></select></td>
+                                <td class="columna4"><input type="number" placeholder="Precio por unidad"></td>
+                            </tr>
+                        </table>
+                        <div class="custom-button-group">
+                            <button class="btn btn-primary btn-sm">Nuevo insumo</button>
+                            <button class="btn btn-primary btn-sm">Confirmar insumos</button>
+                            <button class="btn btn-primary btn-sm">Volver</button>
+                        </div>
                     </div>
+
+                    <div>
+                        <p class="h4 mt-4">Distribucion de costos de insumos de acuerdo a su uso en los productos o servicios</p>
+                        <table class="distribution-table">
+                            <tr>
+                                <th class="columna1">#</th>
+                                <th class="columna2">Insumo</th>
+                                <th class="columna3">Cantidad</th>
+                            </tr>
+                            <tr>
+                                <td class="columna1">1</td>
+                                <td class="columna2">¿Para cuántos pasteles alcanza cada litro de leche?</td>
+                                <td class="columna3"><input type="number" name="" id=""></td>
+                            </tr>
+                        </table>
+                        <div class="custom-button-group">
+                            <button class="btn btn-primary btn-sm">Confirmar distribuciones</button>
+                            <button class="btn btn-primary btn-sm">Volver</button>
+                        </div>
+                    </div>
+
                 </div>
 
-            </div>
+                <hr>
 
-            <div class="row">
-                <p>Inversión</p>
-            </div>
+                <div class="row">
+                    <p class="h2">Inversión</p>
 
-            <div class="row">
-                <p>Financiamiento</p>
+                    <div>
+                        <p class="h4">Inversión requerida en activos</p>
+                        <p class="h5">Lista de activos, mobiliario, equipo e inmuebles necesarios al inicio del proyecto</p>
+
+                        <table>
+                            <tr>
+                                <th>#</th>
+                                <th>Descripción</th>
+                                <th>Valor</th>
+                                <th>Años de vida útil</th>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div>
+                        <p class="h4">Gastos preoperativos</p>
+                        <p class="h5">Lista de gastos a realizar previamente a la puesta en marcha del proyecto</p>
+
+                        <table>
+                            <tr>
+                                <th>#</th>
+                                <th>Descripción</th>
+                                <th>Valor</th>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div>
+                        <p class="h4">Gastos de operación</p>
+                        <p class="h5">Lista de gastos de operación independientemente de su periodicidad (mes, bimestre o año)</p>
+
+                        <table>
+                            <tr>
+                                <th>No</th>
+                                <th>Descripción</th>
+                                <th>Valor</th>
+                                <th>Periodicidad</th>
+                                <th>Valor anualizado</th>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <p class="h2">Financiamiento</p>
+                </div>
             </div>
 
         </div>
+
     </div>
+
 </body>
 
 </html>
