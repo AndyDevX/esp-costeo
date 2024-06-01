@@ -1,0 +1,20 @@
+<?xml version="1.0" encondige="UTF-8"?><!-- esta es la declaración inicial debe ir siempre y el ENCODING es para que reconozca la Ñ-->
+
+<libreria>
+    <libro categoria="Suspenso">
+        <autor> Stepthen King</autor>
+        <nombre>El Resplandor </nombre>
+        <año>1977</año>
+    </libro>
+    <libro categoria="Terror">
+        <autor> Stepthen King</autor>
+        <nombre>El Resplandor </nombre>
+        <año>1977</año>
+    </libro>
+
+
+
+
+</libreria>
+
+

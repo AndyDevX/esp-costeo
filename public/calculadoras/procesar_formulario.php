@@ -5,6 +5,8 @@ include ('conexion.php');
 
 // Obtener valores del formulario
 
+
+
 $diaInicial = $_POST ['dia_inicial'];
 $mesInicial = $_POST ['mes_inicial'];
 $añoInicial = $_POST ['año_inicial'];
@@ -33,7 +35,7 @@ if ($variable1 == 1970 && $variable2 == 1) {
 
 $resultados=inpc_historico($variable1,$variable2);
 
-
+ 
 $variable3=$añoFinal;
 $variable4=$mesFinal;
 
@@ -113,7 +115,7 @@ if($facturoDeActualización < 1){
 $actualizacion = number_format((($contribucionH *$facturoDeActualización ) - $contribucionH),2); 
           
 
-$importe_recargo= $actualizacion + $contribucionH;
+$importe_recargo= number_format((($contribucionH + $actualizacion ) * $factorRecargo),2); 
 
 
 $tabla = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
