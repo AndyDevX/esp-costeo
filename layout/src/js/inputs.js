@@ -60,6 +60,7 @@ function addInput (tableID) {
             break;
 
         case 'actives-table':
+            let newDescription = document.createElement()
             break;
 
         case 'preoperatives-table':
