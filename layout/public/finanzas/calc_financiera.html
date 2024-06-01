@@ -44,7 +44,7 @@
                         </table>
 
                         <div class="custom-button-group">
-                            <button onclick="addInput('input-table')" class="btn btn-primary btn-sm">Nuevo insumo</button>
+                            <button onclick="RowInputs()" class="btn btn-primary btn-sm">Nuevo insumo</button>
                             <button class="btn btn-primary btn-sm">Confirmar insumos</button>
                             <button class="btn btn-primary btn-sm">Volver</button>
                         </div>
@@ -89,16 +89,10 @@
                                 <th class="columna3">Valor</th>
                                 <th class="columna4">Años de vida útil</th>
                             </tr>
-                            <tr>
-                                <td class="columna1">1</td>
-                                <td class="columna2"><input type="text"></td>
-                                <td class="columna3"><input type="number"></td>
-                                <td class="columna4"><input type="number"></td>
-                            </tr>
                         </table>
 
                         <div class="custom-button-group">
-                            <button class="btn btn-primary btn-sm">Nuevo activo</button>
+                            <button onclick="RowActives()" class="btn btn-primary btn-sm">Nuevo activo</button>
                             <button class="btn btn-primary btn-sm">Confirmar activos</button>
                             <button class="btn btn-primary btn-sm">Modificar activos</button>
                         </div>
@@ -178,7 +172,8 @@
     </div>
 
     <!-- Scripts -->
-    <script src="../../src/js/inputs.js"></script>
+    <script src="../../src/js/inputs_insumos.js"></script>
+    <script src="../../src/js/actives_inputs.js"></script>
 
 </body>
 
