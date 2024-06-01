@@ -34,13 +34,13 @@ body, html {
     background-color: rgba(40, 40, 40, 0.7); /* Fondo oscuro semi-transparente */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    padding: 30px;
-    margin: 50px auto;
+    padding: 65px 30px 30px;
+    margin: 25px auto;
     max-width: 950px;
     color: white;
     border-radius: 10px;
 
-    height: 80%;
+    height: 90%;
     overflow: hidden;
 
     /* Logo */
@@ -57,7 +57,6 @@ body, html {
     input {
         background-color: rgb(21, 21, 21);
         width: 100%;
-        margin-bottom: 15px;
         color: rgb(155, 155, 155);
         border: none;
     }
@@ -71,13 +70,29 @@ body, html {
         color: rgb(82, 82, 82);
     }
 
+
     button {
         display: block;
         width: 100%;
     }
+
+
+    select {
+        background-color: rgb(21, 21, 21);
+        width: 100%;
+        color: rgb(155, 155, 155);
+        border: none;
+    }
+    
+    select::focus {
+        background-color: #3b3b3b;
+        color: white;
+    }
 }
 
-.input-table {
+
+
+.custTable {
     width: 100%;
     background-color: rgb(61, 61, 61);
     margin-bottom: 10px;
@@ -94,45 +109,76 @@ body, html {
         }
     }
 
-    .columna1 {
-        width: 5%;
-    }
-    .columna2 {
-        width: 45%;
-    }
-    .columna3 {
-        width: 30%;
-    }
-    .columna4 {
-        width: 20%;
-    }
-}
-
-.distribution-table {
-    width: 100%;
-    background-color: rgb(61, 61, 61);
-    margin-bottom: 10px;
-
-    tr {
-        border: solid 1px rgb(104, 104, 104);
-
-        th {
-            border: solid 1px rgb(104, 104, 104);
+    #input-table {
+        .columna1 {
+            width: 5%;
         }
-
-        td {
-            border: solid 1px rgb(104, 104, 104);
+        .columna2 {
+            width: 45%;
+        }
+        .columna3 {
+            width: 30%;
+        }
+        .columna4 {
+            width: 20%;
         }
     }
 
-    .columna1 {
-        width: 5%;
+    #actives-table {
+        .columna1 {
+            width: 5%;
+        }
+        .columna2 {
+            width: 65%;
+        }
+        .columna3 {
+            width: 15%;
+        }
+        .columna4 {
+            width: 15%;
+        }
     }
-    .columna2 {
-        width: 85%;
+
+    #distribution-table {
+        .columna1 {
+            width: 5%;
+        }
+        .columna2 {
+            width: 85%;
+        }
+        .columna3 {
+            width: 10%;
+        }
     }
-    .columna3 {
-        width: 10%;
+
+    #preoperatives-table {
+        .columna1 {
+            width: 1%;
+        }
+        .columna2 {
+            width: 95%;
+        }
+        .columna3 {
+            width: 4%;
+        }
+    }
+
+    #operatives-table {
+        .columna1 {
+            width: 5%;
+        }
+        .columna2 {
+            width: 40%;
+        }
+        .columna3 {
+            width: 5%;
+        }
+        .columna4 {
+            width: 40%;
+        }
+        .columna5 {
+            width: 10%;
+        }
     }
 }
 
@@ -142,6 +188,9 @@ body, html {
     gap: 10px;
 }
 
-#back {
-    
+#top-back {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 6rem;
 }

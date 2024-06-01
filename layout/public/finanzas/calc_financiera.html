@@ -16,6 +16,8 @@
     <div class="bg-image d-flex justify-content-center align-items-center">
         <div class="custom-container text-center">
 
+            <button class="btn btn-primary" id="top-back" onclick="window.location.href='../menu.html';">Volver</button>
+
             <div class="content">
                 <p class="h1 mb-3" id="form-title">Calculadora financiera</p>
                 <hr>
@@ -25,42 +27,24 @@
 
                     <div>
                         <p class="h4 mt-4">Producto o servico unitario del cual se calculará el costo</p>
-                        <input type="text" placeholder="Nombre del producto o servicio">
+                        <input class="mb-2" type="text" placeholder="Nombre del producto o servicio">
                         <button class="btn btn-primary">Asignar nombre</button>
                     </div>
                     
                     <div>
                         <p class="h4 mt-4">Insumos directos aplicados al producto o servicio</p>
-                        <table class="input-table">
+                        <table id="input-table" class="custTable">
                             <tr>
                                 <th class="columna1">#</th>
                                 <th class="columna2">Descripción</th>
                                 <th class="columna3">Se compra por</th>
                                 <th class="columna4">Precio por unidad</th>
                             </tr>
-                            <tr>
-                                <td class="columna1">1</td>
-                                <td class="columna2">Leche</td>
-                                <td class="columna3">Litro</td>
-                                <td class="columna4">20.34</td>
-                            </tr>
-                            <tr>
-                                <td class="columna1">2</td>
-                                <td class="columna2">Harina</td>
-                                <td class="columna3">Kilogramo</td>
-                                <td class="columna4">42.12</td>
-                            </tr>
-                            <tr>
-                                <td class="columna1">3</td>
-                                <td class="columna2">
-                                    <input type="text" placeholder="Insumo">
-                                </td>
-                                <td class="columna3"><select><option>Unidad</option></select></td>
-                                <td class="columna4"><input type="number" placeholder="Precio por unidad"></td>
-                            </tr>
+                            
                         </table>
+
                         <div class="custom-button-group">
-                            <button class="btn btn-primary btn-sm">Nuevo insumo</button>
+                            <button onclick="addInput('input-table')" class="btn btn-primary btn-sm">Nuevo insumo</button>
                             <button class="btn btn-primary btn-sm">Confirmar insumos</button>
                             <button class="btn btn-primary btn-sm">Volver</button>
                         </div>
@@ -68,7 +52,7 @@
 
                     <div>
                         <p class="h4 mt-4">Distribucion de costos de insumos de acuerdo a su uso en los productos o servicios</p>
-                        <table class="distribution-table">
+                        <table id="distribution-table" class="custTable">
                             <tr>
                                 <th class="columna1">#</th>
                                 <th class="columna2">Insumo</th>
@@ -80,6 +64,7 @@
                                 <td class="columna3"><input type="number" name="" id=""></td>
                             </tr>
                         </table>
+
                         <div class="custom-button-group">
                             <button class="btn btn-primary btn-sm">Confirmar distribuciones</button>
                             <button class="btn btn-primary btn-sm">Volver</button>
@@ -97,44 +82,88 @@
                         <p class="h4">Inversión requerida en activos</p>
                         <p class="h5">Lista de activos, mobiliario, equipo e inmuebles necesarios al inicio del proyecto</p>
 
-                        <table>
+                        <table id="actives-table" class="custTable">
                             <tr>
-                                <th>#</th>
-                                <th>Descripción</th>
-                                <th>Valor</th>
-                                <th>Años de vida útil</th>
+                                <th class="columna1">#</th>
+                                <th class="columna2">Descripción</th>
+                                <th class="columna3">Valor</th>
+                                <th class="columna4">Años de vida útil</th>
+                            </tr>
+                            <tr>
+                                <td class="columna1">1</td>
+                                <td class="columna2"><input type="text"></td>
+                                <td class="columna3"><input type="number"></td>
+                                <td class="columna4"><input type="number"></td>
                             </tr>
                         </table>
+
+                        <div class="custom-button-group">
+                            <button class="btn btn-primary btn-sm">Nuevo activo</button>
+                            <button class="btn btn-primary btn-sm">Confirmar activos</button>
+                            <button class="btn btn-primary btn-sm">Modificar activos</button>
+                        </div>
                     </div>
 
                     <div>
                         <p class="h4">Gastos preoperativos</p>
                         <p class="h5">Lista de gastos a realizar previamente a la puesta en marcha del proyecto</p>
 
-                        <table>
+                        <table id="preoperatives-table" class="custTable">
                             <tr>
-                                <th>#</th>
-                                <th>Descripción</th>
-                                <th>Valor</th>
+                                <th class="columna1">#</th>
+                                <th class="columna2">Descripción</th>
+                                <th class="columna3">Valor</th>
+                            </tr>
+                            <tr>
+                                <td class="columna1">1</td>
+                                <td class="columna2"><input type="text"></td>
+                                <td class="columna3"><input type="number"></td>
                             </tr>
                         </table>
+
+                        <div class="custom-button-group">
+                            <button class="btn btn-primary btn-sm">Nuevo gasto preoperativo</button>
+                            <button class="btn btn-primary btn-sm">Confirmar gastos preoperativos</button>
+                            <button class="btn btn-primary btn-sm">Modificar gastos preoperativos</button>
+                        </div>
                     </div>
 
                     <div>
                         <p class="h4">Gastos de operación</p>
                         <p class="h5">Lista de gastos de operación independientemente de su periodicidad (mes, bimestre o año)</p>
 
-                        <table>
+                        <table id="operatives-table" class="custTable">
                             <tr>
-                                <th>No</th>
-                                <th>Descripción</th>
-                                <th>Valor</th>
-                                <th>Periodicidad</th>
-                                <th>Valor anualizado</th>
+                                <th class="columna1">#</th>
+                                <th class="columna2">Descripción</th>
+                                <th class="columna3">Valor</th>
+                                <th class="columna4">Periodicidad</th>
+                                <th class="columna5">Valor anualizado</th>
+                            </tr>
+                            <tr>
+                                <td class="columna1">1</td>
+                                <td class="columna2"><input type="text"></td>
+                                <td class="columna3"><input type="number"></td>
+                                <td class="columna4">
+                                    <select>
+                                        <option>Mensual</option>
+                                        <option>Bimestral</option>
+                                        <option>Trimestral</option>
+                                        <option>Cuatrimestral</option>
+                                        <option>Semestral</option>
+                                        <option>Anual</option>
+                                    </select>
+                                </td>
+                                <td class="columna5"><input type="number"></td>
                             </tr>
                         </table>
-                    </div>
 
+                        <div class="custom-button-group">
+                            <button class="btn btn-primary btn-sm">Nuevo gasto de operación</button>
+                            <button class="btn btn-primary btn-sm">Confirmar gastos de operación</button>
+                            <button class="btn btn-primary btn-sm">Modificar gastos de operación</button>
+                        </div>
+                    </div>
                 </div>
 
                 <hr>
@@ -147,6 +176,9 @@
         </div>
 
     </div>
+
+    <!-- Scripts -->
+    <script src="../../src/js/inputs.js"></script>
 
 </body>
 
