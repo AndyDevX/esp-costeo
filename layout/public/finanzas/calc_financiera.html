@@ -25,54 +25,50 @@
                 <div class="row">
                     <p class="h2">Costeo</p>
 
-                    <div>
+                    <div id="seccion1" class="section">
                         <p class="h4 mt-4">Producto o servico unitario del cual se calculará el costo</p>
-                        <input class="mb-2" type="text" placeholder="Nombre del producto o servicio">
-                        <button class="btn btn-primary">Asignar nombre</button>
+                        <input id="prod_name" class="mb-2" type="text" placeholder="Nombre del producto o servicio">
+                        <button onclick="enableSection('seccion1', 'seccion2'), setName()" class="btn btn-primary">Asignar nombre</button>
                     </div>
                     
-                    <div>
-                        <p class="h4 mt-4">Insumos directos aplicados al producto o servicio</p>
+                    <div id="seccion2" class="section">
+                        <p id="prod_header1" class="h4 mt-4">Insumos directos aplicados al producto o servicio</p>
                         <table id="input-table" class="custTable">
                             <tr>
-                                <th class="columna1">#</th>
-                                <th class="columna2">Descripción</th>
-                                <th class="columna3">Se compra por</th>
-                                <th class="columna4">Precio por unidad</th>
+                                <th id="number" class="columna1">#</th>
+                                <th id="description" class="columna2">Descripción</th>
+                                <th id="unit" class="columna3">Se compra por</th>
+                                <th id="price" class="columna4">Precio por unidad</th>
                             </tr>
                             
                         </table>
 
                         <div class="custom-button-group">
                             <button onclick="RowInputs()" class="btn btn-primary btn-sm">Nuevo insumo</button>
-                            <button class="btn btn-primary btn-sm">Confirmar insumos</button>
-                            <button class="btn btn-primary btn-sm">Volver</button>
+                            <button onclick="enableSection('seccion2', 'seccion3'), readData()" class="btn btn-primary btn-sm">Confirmar insumos</button>
+                            <button onclick="disableSection('seccion2', 'seccion1')" class="btn btn-primary btn-sm">Volver</button>
                         </div>
                     </div>
 
-                    <div>
-                        <p class="h4 mt-4">Distribucion de costos de insumos de acuerdo a su uso en los productos o servicios</p>
-                        <table id="distribution-table" class="custTable">
+                    <div id="seccion3" class="section">
+                        <p id="prod_header2" class="h4 mt-4">Distribucion de costos de insumos de acuerdo a su uso en los productos o servicios</p>
+                        <table id="tabla-prorrateo" class="custTable">
                             <tr>
                                 <th class="columna1">#</th>
                                 <th class="columna2">Insumo</th>
                                 <th class="columna3">Cantidad</th>
                             </tr>
-                            <tr>
-                                <td class="columna1">1</td>
-                                <td class="columna2">¿Para cuántos pasteles alcanza cada litro de leche?</td>
-                                <td class="columna3"><input type="number" name="" id=""></td>
-                            </tr>
                         </table>
 
                         <div class="custom-button-group">
-                            <button class="btn btn-primary btn-sm">Confirmar distribuciones</button>
-                            <button class="btn btn-primary btn-sm">Volver</button>
+                            <button onclick="distribucion()" class="btn btn-primary btn-sm">Confirmar distribuciones</button>
+                            <button onclick="disableSection('seccion3', 'seccion2')" class="btn btn-primary btn-sm">Volver</button>
                         </div>
                     </div>
 
                 </div>
 
+                <hr>
                 <hr>
 
                 <div class="row">
@@ -172,8 +168,9 @@
     </div>
 
     <!-- Scripts -->
-    <script src="../../src/js/inputs_insumos.js"></script>
     <script src="../../src/js/actives_inputs.js"></script>
+    <script src="../../src/js/inputs_insumos.js"></script>
+    <script src="../../src/js/step_control.js"></script>
 
 </body>
 

@@ -11,7 +11,6 @@ function RowInputs () {
         let newNumber = document.createElement('td');
         newNumber.innerText = insumos_number;
         newNumber.setAttribute('class', 'columna1');
-        
         // Creamos la celda
         let newDescription = document.createElement('td');
             // Creamos el input
@@ -19,12 +18,10 @@ function RowInputs () {
             newInput.setAttribute('type','text');
             newInput.setAttribute('placeholder', 'Descripción del insumo');
         newDescription.setAttribute('class', 'columna2');
-
         // Celda para unidad
         let newUnit = document.createElement('td');
             // Select
             let newSelect = document.createElement('select');
-    
             // Asignar valores
             for (let i = 0; i < units.length; i++) {
                 let newOption = document.createElement('option');
@@ -49,7 +46,6 @@ function RowInputs () {
         newPrice.appendChild(newPriceInput);
         newDescription.appendChild(newInput);
         newUnit.appendChild(newSelect);
-        
         newRow.appendChild(newNumber);
         newRow.appendChild(newDescription);
         newRow.appendChild(newUnit);

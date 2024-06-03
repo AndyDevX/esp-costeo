@@ -19,7 +19,7 @@ body, html {
 
 /* Fondo */
 .bg-image {
-    background-image: url("../../assets/img/r32.jpg");
+    background-image: url("../../assets/img/gtr_bg.jpg");
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -139,7 +139,7 @@ body, html {
         }
     }
 
-    #distribution-table {
+    #tabla-prorrateo {
         .columna1 {
             width: 5%;
         }
@@ -193,4 +193,8 @@ body, html {
     top: 1rem;
     left: 1rem;
     width: 6rem;
+}
+
+.section {
+    display: none;
 }
