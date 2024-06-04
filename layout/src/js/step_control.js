@@ -1,3 +1,6 @@
+var json;
+var name;
+
 document.getElementById("seccion1").style.display = "block";
 
 function enableSection(actual, next) {
@@ -20,12 +23,10 @@ function setName () {
     document.getElementById("prod_header2").innerText = "Distribucion de costos de insumos de acuerdo a su uso en " + name;
 
     // Definir en las columnas de la sección 3
-    return name;
+    this.name = name;
 }
 
 // Sección 2
-var json;
-
 function readData() {
     json = tableToJson();
     
@@ -89,6 +90,86 @@ function distribucion() {
         }
     
         console.log(JSON.stringify(json, null, 2));
+
+    enableSection("seccion3", "seccion4");
+}
+
+    // Confirmar distribución y mostrar resultado
+function costTable() {
+    let table = document.getElementById("tabla-costeo");
+    var data = json;
+
+    var costoTotal = 0;
+/*
+    // Limpiar la tabla
+    tableBody.innerHTML = "";
+
+    // Iterar en el JSON
+    data.forEach(item => {
+        // Nueva fila
+        const row = document.createElement("tr");
+
+        // Crear celdas de la fila
+        Object.values(item).forEach(value => {
+            const cell = document.createElement("td");
+            cell.textContent = value;
+            row.appendChild(cell);
+        });
+
+        tableBody.appendChild(row);
+    });
+*/
+    while(table.rows.length > 1) {
+        table.deleteRow(1);
+    }
+
+    var previousItems = [];
+
+    data.forEach(function(item) {
+
+        // Crear una nueva fila
+        var row = table.insertRow();
+
+        // Insertar celdas con los datos del JSON en la fila
+        var cellNo = row.insertCell(0);
+        var cellInput = row.insertCell(1);
+        var cellAmount = row.insertCell(2);
+        var cellUnit = row.insertCell(3);
+        var cellCost = row.insertCell(4);
+
+        // Asignar los valores del JSON a las celdas
+
+        if (item.number == null) { // Impuestos y seguridad
+
+            cellNo.textContext = "";
+            cellInput.textContent = item.description;
+            cellAmount.textContent = "";
+            cellUnit.textContent = item.unit;
+
+            for (var i = 0; i < previousItems.length; i++) {
+                if (previousItems[i].description == item.amount) {
+                    let cost = ((1/previousItems[i].amount * previousItems[i].price) * 0.35);
+                    cellCost.textContent = "$ " + cost.toFixed(2);
+                    costoTotal += cost;
+                }
+            }
+
+        } else {
+            let cost = (1/item.amount * item.price);
+
+            cellNo.textContent = item.number;
+            cellInput.textContent = item.description;
+            cellAmount.textContent = (1 / item.amount).toFixed(3);
+            cellUnit.textContent = item.unit;
+            cellCost.textContent = "$ " + cost.toFixed(2);
+
+            costoTotal += cost;
+
+            previousItems.push(item);
+        }
+    });
+
+    document.getElementById("totalCost").textContent = costoTotal.toFixed(2);
 }
 
 

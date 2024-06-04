@@ -61,9 +61,28 @@
                         </table>
 
                         <div class="custom-button-group">
-                            <button onclick="distribucion()" class="btn btn-primary btn-sm">Confirmar distribuciones</button>
+                            <button onclick="distribucion(), costTable()" class="btn btn-primary btn-sm">Confirmar distribuciones</button>
                             <button onclick="disableSection('seccion3', 'seccion2')" class="btn btn-primary btn-sm">Volver</button>
                         </div>
+                    </div>
+
+                    <div id="seccion4" class="section">
+                        <p class="h4 mt-4">Costeo unitario de cada producto o servicios proporcionado considerando los insumos registrados</p>
+                        <table id="tabla-costeo" class="custTable">
+                            <thead>
+                                <tr>
+                                    <th class="columna1">#</th>
+                                    <th class="columna2">Insumo</th>
+                                    <th class="columna3">Cantidad</th>
+                                    <th class="columna4">Unidad</th>
+                                    <th class="columna5">Costo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="costeo-body">
+                                <!-- Filas creadas -->
+                            </tbody>
+                        </table>
+                        <p class="h5">Costeo total: $<span id="totalCost"></span></p>
                     </div>
 
                 </div>
