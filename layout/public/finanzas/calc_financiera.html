@@ -28,7 +28,7 @@
                     <div id="seccion1" class="section">
                         <p class="h4 mt-4">Producto o servico unitario del cual se calculará el costo</p>
                         <input id="prod_name" class="mb-2" type="text" placeholder="Nombre del producto o servicio">
-                        <button onclick="enableSection('seccion1', 'seccion2'), setName()" class="btn btn-primary">Asignar nombre</button>
+                        <button onclick="setName()" class="btn btn-primary">Asignar nombre</button>
                     </div>
                     
                     <div id="seccion2" class="section">
@@ -82,6 +82,7 @@
                                 <!-- Filas creadas -->
                             </tbody>
                         </table>
+                        <!-- De aquí sacaremos el total para los siguientes cálculos -->
                         <p class="h5">Costeo total: $<span id="totalCost"></span></p>
                     </div>
 
@@ -93,27 +94,26 @@
                 <div class="row">
                     <p class="h2">Inversión</p>
 
-                    <div>
+                    <div id="seccion5" class="section">
                         <p class="h4">Inversión requerida en activos</p>
                         <p class="h5">Lista de activos, mobiliario, equipo e inmuebles necesarios al inicio del proyecto</p>
 
                         <table id="actives-table" class="custTable">
                             <tr>
-                                <th class="columna1">#</th>
-                                <th class="columna2">Descripción</th>
-                                <th class="columna3">Valor</th>
-                                <th class="columna4">Años de vida útil</th>
+                                <th id="activeNumber" class="columna1">#</th>
+                                <th id="activeDescription" class="columna2">Descripción</th>
+                                <th id="activeValue" class="columna3">Valor</th>
+                                <th id="activeYears" class="columna4">Años de vida útil</th>
                             </tr>
                         </table>
 
                         <div class="custom-button-group">
                             <button onclick="RowActives()" class="btn btn-primary btn-sm">Nuevo activo</button>
-                            <button class="btn btn-primary btn-sm">Confirmar activos</button>
-                            <button class="btn btn-primary btn-sm">Modificar activos</button>
+                            <button onclick="setTotalActivos(), readFinanciamientoTable('actives-table', 'activos')" class="btn btn-primary btn-sm">Confirmar activos</button>
                         </div>
                     </div>
 
-                    <div>
+                    <div id="seccion6" class="section">
                         <p class="h4 mt-3">Gastos preoperativos</p>
                         <p class="h5">Lista de gastos a realizar previamente a la puesta en marcha del proyecto</p>
 
@@ -123,21 +123,16 @@
                                 <th class="columna2">Descripción</th>
                                 <th class="columna3">Valor</th>
                             </tr>
-                            <tr>
-                                <td class="columna1">1</td>
-                                <td class="columna2"><input type="text"></td>
-                                <td class="columna3"><input type="number"></td>
-                            </tr>
                         </table>
 
                         <div class="custom-button-group">
-                            <button class="btn btn-primary btn-sm">Nuevo gasto preoperativo</button>
+                            <button onclick="RowPreoperatives()" class="btn btn-primary btn-sm">Nuevo gasto preoperativo</button>
                             <button class="btn btn-primary btn-sm">Confirmar gastos preoperativos</button>
-                            <button class="btn btn-primary btn-sm">Modificar gastos preoperativos</button>
+                            <button onclick="disableSection('seccion6', 'seccion5')" class="btn btn-primary btn-sm">Volver</button>
                         </div>
                     </div>
 
-                    <div>
+                    <div id="seccion7" class="section">
                         <p class="h4 mt-3">Gastos de operación</p>
                         <p class="h5">Lista de gastos de operación independientemente de su periodicidad (mes, bimestre o año)</p>
 
@@ -173,6 +168,11 @@
                             <button class="btn btn-primary btn-sm">Modificar gastos de operación</button>
                         </div>
                     </div>
+
+                    <p id="totalActivosContainer" style="display: none;">Suma de inversión requerida en activos: $<span id="totalActivos"></span></p>
+                    <p id="totalPreoperativosContainer" style="display: none;">Suma de gastos preoperativos: $<span id="totalPreoperativos"></span></p>
+                    <p id="totalOperativosContainer" style="display: none;">Suma de gastos de operación: $<span id="totalOperativos"></span></p>
+
                 </div>
 
                 <hr>

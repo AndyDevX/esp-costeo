@@ -1,0 +1,44 @@
+{
+    "activos": [
+        {
+            "numero": "1",
+            "descripcion": "Computadora",
+            "valor": "15000",
+            "años": "5"
+        },
+        {
+            "numero": "2",
+            "descripcion": "Mesa",
+            "valor": "5000",
+            "años": "10"
+        }
+    ],
+    "preoperativos": [
+        {
+            "numero": "1",
+            "descripcion": "Licencia de software",
+            "valor": "2000"
+        },
+        {
+            "numero": "2",
+            "descripcion": "Publicidad inicial",
+            "valor": "3000"
+        }
+    ],
+    "operativos": [
+        {
+            "numero": "1",
+            "descripcion": "Alquiler",
+            "valor": "10000",
+            "periodicidad": "Mensual",
+            "valor_anualizado": "120000"
+        },
+        {
+            "numero": "2",
+            "descripcion": "Servicios públicos",
+            "valor": "2000",
+            "periodicidad": "Mensual",
+            "valor_anualizado": "24000"
+        }
+    ]
+}
