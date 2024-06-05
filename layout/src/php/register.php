@@ -10,6 +10,11 @@
         $password = $connection -> real_escape_string (trim ($_POST ["password"]));
         $password_confirmation = $connection -> real_escape_string (trim ($_POST['confirm_password']));
 
+        if (empty($username) || empty($email) || empty($password) || empty($password_confirmation)) {
+            echo "<script>alert ('Por favor, completa todos los campos.');history.back();</script>";
+            exit;
+        }
+
         // Comparar contraseñas
         if ($password !== $password_confirmation) {
             echo "<script>alert ('¡Las contraseñas no coinciden!');history.back();</script>";

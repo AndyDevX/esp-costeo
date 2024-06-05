@@ -7,6 +7,11 @@
         $email = $connection -> real_escape_string (trim ($_POST ["email"]));
         $password = $connection -> real_escape_string (trim ($_POST ["password"]));
 
+        if (empty($email) || empty($password)) {
+            echo "<script>alert ('Por favor, completa todos los campos.');history.back();</script>";
+            exit;
+        }
+
         // Comprobar existencia del usuario usando una consulta preparada
         $statement = $connection -> prepare ("SELECT id, username, password FROM users WHERE email = ?");
         $statement -> bind_param ("s", $email);
