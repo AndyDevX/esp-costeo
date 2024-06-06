@@ -208,39 +208,51 @@ function readFinanciamientoTable(idTabla, tipo) {
         let objeto = {
             "numero": celdas[0].innerText.trim(),
             "descripcion": celdas[1].querySelector('input') ? celdas[1].querySelector('input').value.trim() : '',
-            "valor": celdas[2].querySelector('input') ? celdas[2].querySelector('input').value.trim() : '',
-            "años": celdas[3] && celdas[3].querySelector('input') ? celdas[3].querySelector('input').value.trim() : '',
-            "periodicidad": celdas[4] && celdas[4].querySelector('input') ? celdas[4].querySelector('input').value.trim() : '',
-            "valor_anualizado": celdas[5] && celdas[5].querySelector('input') ? celdas[5].querySelector('input').value.trim() : ''
+            "valor": celdas[2].querySelector('input') ? celdas[2].querySelector('input').value.trim() : ''
         };
 
+        // Opcionalmente agregar campos específicos si existen
+        if (celdas[3] && celdas[3].querySelector('input')) {
+            objeto["años"] = celdas[3].querySelector('input').value.trim();
+        }
+        if (celdas[4] && celdas[4].querySelector('input')) {
+            objeto["periodicidad"] = celdas[4].querySelector('input').value.trim();
+        }
+        if (celdas[5] && celdas[5].querySelector('input')) {
+            objeto["valor_anualizado"] = celdas[5].querySelector('input').value.trim();
+        }
+
         // Agregar el objeto al array correspondiente en datos
+        if (!datos[tipo]) {
+            datos[tipo] = [];
+        }
         datos[tipo].push(objeto);
     }
+
+    total_datos(tipo, `total${capitalizeFirstLetter(tipo)}Container`, `total${capitalizeFirstLetter(tipo)}`);
 
     console.log(JSON.stringify(datos, null, 2));
     enableSection("seccion5", "seccion6");
 }
 
-// NO FUNCIONA ESTA PORQUERÍA, MAÑANA AVERIGUO CÓMO
-function sumarValoresActivos(datos) {
-    const activos = datos.activos;
-
-    const suma = activos.reduce((total, activo) => {
-        return total + parseInt(activo.valor);
-    }, 0);
-
-    console.log(suma);
-    return suma;
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function setTotalActivos(datos) {
-    let p = document.getElementById("totalActivosContainer");
-    let span = document.getElementById("totalActivos");
-    let totalActivos = sumarValoresActivos(datos);
 
-    p.style.display = "block";
-    span.innerText = totalActivos;
+// Obtener valores, suma total y mostrarlo
+function total_datos(tipo, containerId, totalId) {
+    let items = datos[tipo];
+    
+    let total = items.reduce((sum, item) => {
+        let valor = parseFloat(item.valor.replace(/,/g, ''));
+        return sum + (isNaN(valor) ? 0 : valor);
+    }, 0);
+
+    console.log(total);
+
+    document.getElementById(containerId).style.display = "block";
+    document.getElementById(totalId).textContent = total.toLocaleString('en-US');
 }
 
 // Sección 7

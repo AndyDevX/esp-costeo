@@ -109,7 +109,7 @@
 
                         <div class="custom-button-group">
                             <button onclick="RowActives()" class="btn btn-primary btn-sm">Nuevo activo</button>
-                            <button onclick="setTotalActivos(), readFinanciamientoTable('actives-table', 'activos')" class="btn btn-primary btn-sm">Confirmar activos</button>
+                            <button onclick="readFinanciamientoTable('actives-table', 'activos')" class="btn btn-primary btn-sm">Confirmar activos</button>
                         </div>
                     </div>
 
@@ -127,7 +127,7 @@
 
                         <div class="custom-button-group">
                             <button onclick="RowPreoperatives()" class="btn btn-primary btn-sm">Nuevo gasto preoperativo</button>
-                            <button class="btn btn-primary btn-sm">Confirmar gastos preoperativos</button>
+                            <button onclick="readFinanciamientoTable('preoperatives-table', 'preoperativos')" class="btn btn-primary btn-sm">Confirmar gastos preoperativos</button>
                             <button onclick="disableSection('seccion6', 'seccion5')" class="btn btn-primary btn-sm">Volver</button>
                         </div>
                     </div>
@@ -173,6 +173,7 @@
                     <p id="totalPreoperativosContainer" style="display: none;">Suma de gastos preoperativos: $<span id="totalPreoperativos"></span></p>
                     <p id="totalOperativosContainer" style="display: none;">Suma de gastos de operación: $<span id="totalOperativos"></span></p>
 
+                    <!-- Dejar tablas con depreciación para vista -->
                 </div>
 
                 <hr>
