@@ -3,56 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ISR Ingresos por sueldos </title>
+    <title>ISR Ingresos por arrendamiento </title>
 </head>
 <body>
-    <h1>ISR Ingresos por sueldos </h1>
+    <h1>ISR Ingresos por arrendamiento </h1>
+
+    <h3>Ingresos </h3>
     <form method="POST" action="">
-        <label for="valor1">Ingresos mensuales:</label>
-        <input type="number" id="valor1" name="valor1" step="0.01" required><br><br>
-        
-        <label for="valor2">Ingresos exento:</label>
-        <input type="number" id="valor2" name="valor2" step="0.01" required><br><br>
-        
-        <label for="periodo">Periodo:</label>
-        <select id="periodo" name="periodo" required>
-            <option value="dia">Día</option>
-            <option value="semana">Semana</option>
-            <option value="catorcena">Catorcena</option>
-            <option value="quincena">Quincena</option>
-            <option value="mes">Mes</option>
-       <!--<option value="trimestre">Trimestre</option>
-            <option value="cuatrimestre">Cuatrimestre</option>
-            <option value="semestre">Semestre</option>
-            <option value="anual">Anual</option>-->
+        <label for="ingreso1">Ingresos por arrendamiento mensuales PF:</label>
+        <input type="number" id="ingreso_a_pf" name="valor1" step="0.01" required><br><br>
+        <label for="ingreso2">Ingresos por arrendamiento mensuales PM:</label>
+        <input type="number" id="ingreso_a_pm" name="valor2" step="0.01" required><br><br>
+        <label for="ingreso3">Ingresos por subarrendamiento mensuales PF:</label>
+        <input type="number" id="ingreso_s_pf" name="valor3" step="0.01" required><br><br>
+        <label for="ingreso4">Ingresos por subarrendamiento mensuales PM:</label>
+        <input type="number" id="ingreso_s_pm" name="valor4" step="0.01" required><br><br>
+    
+        <h3>Deducciones </h3 >
+
+        <label for="opcional ">Deducción opcional (deducción ciega):</label>
+        <select id="ciega" name="deduccion" required>
+            <option value="si">Sí</option>
+            <option value="no">No</option>
+
+    <form method="POST" action="">
+        <label for="deduccion5">Impuesto predial:</label>
+        <input type="number" id="i_p" name="valor5" step="0.01" required><br><br> 
+        <label for="deduccion6">Impuesto locales:</label>
+        <input type="number" id="i_l" name="valor6" step="0.01" required><br><br>  
+        <label for="deduccion7">Gastos de mantenimiento:</label>
+        <input type="number" id="g_m" name="valor7" step="0.01" required><br><br>  
+        <label for="deduccion8">Intereses reales pagados:</label>
+        <input type="number" id="i_r" name="valor8" step="0.01" required><br><br>
+        <label for="deduccion9">Salarios, comisiones y honorarios (incluyendo contribuciones):</label>
+        <input type="number" id="s_c" name="valor9" step="0.01" required><br><br>  
+        <label for="deduccion10">Importe de las primas de seguros:</label>
+        <input type="number" id="p_s" name="valor10" step="0.01" required><br><br>  
+        <label for="deduccion11">Inversiones en construcción, incluyendo adiciones y mejoras:</label>
+        <input type="number" id="i_c" name="valor11" step="0.01" required><br><br>  
+        <label for="deduccion12">Pago de las rentas (en caso de subarrendamiento):</label>
+        <input type="number" id="p_r" name="valor12" step="0.01" required><br><br>  
+   
+           
         </select><br><br>
 
         <input type="submit" value="Enviar">
     </form>
 
     <?php
-if (isset($_POST['valor1']) && isset($_POST['valor2'])&& isset($_POST['periodo'])) {
+if (isset($_POST['valor1']) && isset($_POST['valor2']) && isset($_POST['valor3']) && isset($_POST['valor4']) && isset($_POST['valor5']) && isset($_POST['valor6']) && isset($_POST['valor7']) && isset($_POST['valor8']) && isset($_POST['valor9']) && isset($_POST['valor10'])&& isset($_POST['valor11']) && isset($_POST['valor12'])&& isset($_POST['opcional'])) {
     // Obtener valores del formulario
     $valor1 = $_POST['valor1'];
     $valor2 = $_POST['valor2'];
+    $valor3 = $_POST['valor3'];
+    $valor4 = $_POST['valor4'];
+    $valor5 = $_POST['valor5'];
+    $valor6 = $_POST['valor6'];
+    $valor7 = $_POST['valor7'];
+    $valor8 = $_POST['valor8'];
+    $valor9 = $_POST['valor9'];
+    $valor10 = $_POST['valor10'];
+    $valor11 = $_POST['valor11'];
+    $valor12 = $_POST['valor12'];
     $periodo = $_POST['periodo'];
 
     // Calcular base gravable
-    $base_gravable = $valor1 - $valor2;
 
-    if($periodo =='dia'){
-        $base_gravable_con=$base_gravable*30.4;}
-    elseif($periodo =='semana'){
-        $base_gravable_con=(($base_gravable)/7)*30.4;}
-    elseif($periodo =='catorcena'){
-        $base_gravable_con=($base_gravable/14)*30.4;}
-    elseif($periodo =='quincena'){
-        $base_gravable_con=(($base_gravable)/15)*30.4;}
+    $ingreso_arrendamiento= $valor1+ $valor2;
+    $ingreso_sub = $valor3+ $valor4;
+    $deduccion_gene = $valor5+ $valor6 +$valor7+ $valor8 + $valor9+ $valor10+ $valor11 ;
+    $deduccion_op = $valor5 + ($ingreso_arrendamiento*.35);
+    $deduccion_sub = $valor12;
+
+    
+
+    if($ingreso_arrendamiento > 0){
+        $ingreso_mensual=$ingreso_arrendamiento;}
     else {
-    $base_gravable_con=$base_gravable;
+    $ingreso_mensual=$ingreso_sub;
 }
-
-
+}
 
     // Imprimir valores recibidos y base gravable
     echo "<h2>Valores recibidos:</h2>";
@@ -150,7 +180,7 @@ if ($stmt === false) {
     die("Error en la preparación de la consulta: " . $conectar->error);
 }
 
-$stmt->bind_param("d", $resultado);
+$stmt->bind_param("i", $resultado);
 $stmt->execute();
 $stmt->bind_result($tasa1);
 

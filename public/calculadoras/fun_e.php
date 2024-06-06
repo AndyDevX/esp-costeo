@@ -135,6 +135,8 @@ function fecha_inicial_recargo($año, $id_mes) {
     mysqli_stmt_close($stmt);
 
     return $fecha_inicial_recargo;
+  
+
 }
 
 ?>
