@@ -1,208 +1,338 @@
-<?php
-// Definir variables para los valores predeterminados y el resultado
-$fechaInicio = "";
-$diasSumar = "";
-$diasNoSumar = [];
-$fechaResultante = "";
 
-// Definir las variables para los días inhabilitados
-$i_enero = '01-01-' . date('Y');
-$i_febrero = '';
-$iii_marzo = '';
-$i_mayo = '01-05-' . date('Y');
-$v_mayo = '05-05-' . date('Y');
-$xvi_septiembre = '16-09-' . date('Y');
-$iii_noviembre = '';
-$i_diciembre = '01-12-' . date('Y');
-$xxv_diciembre = '25-12-' . date('Y');
+<!DO<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISR Ingresos por arrendamiento</title>
+    <script>
+        function handleInput() {
+            const ingresoAPF = document.getElementById('ingreso_a_pf');
+            const ingresoAPM = document.getElementById('ingreso_a_pm');
+            const ingresoSPF = document.getElementById('ingreso_s_pf');
+            const ingresoSPM = document.getElementById('ingreso_s_pm');
+            const pagoRentas = document.getElementById('p_r');
+            const deduccionOpcional = document.getElementById('ciega').value;
 
-// Encontrar el primer lunes de febrero
-$primerLunesFebrero = strtotime('first Monday of February');
-if (date('m', $primerLunesFebrero) == 2) {
-    $i_febrero = date('d-m-Y', $primerLunesFebrero);
-} else {
-    // Si el primer lunes de febrero no está en febrero, buscar el siguiente lunes
-    $primerLunesFebrero = strtotime('first Monday of February +1 week');
-    $i_febrero = date('d-m-Y', $primerLunesFebrero);
-}
+            const camposArrendamiento = [ingresoAPF, ingresoAPM];
+            const camposSubarrendamiento = [ingresoSPF, ingresoSPM, pagoRentas];
+            const camposDeducciones = [
+                document.getElementById('i_p'),
+                document.getElementById('i_l'),
+                document.getElementById('g_m'),
+                document.getElementById('i_r'),
+                document.getElementById('s_c'),
+                document.getElementById('p_s'),
+                document.getElementById('i_c')
+            ];
 
-// Definir el array de días inhabilitados
-$dias_inhabiles = [
-    $i_enero => false,
-    $i_febrero => false,
-    $iii_marzo => false,
-    $i_mayo => false,
-    $v_mayo => false,
-    $xvi_septiembre => false,
-    $iii_noviembre => false,
-    $i_diciembre => false,
-    $xxv_diciembre => false
-];
+            // Resetear los campos a habilitados y requeridos
+            camposArrendamiento.forEach(campo => {
+                campo.disabled = false;
+                campo.required = true;
+            });
+            camposSubarrendamiento.forEach(campo => {
+                campo.disabled = false;
+                campo.required = true;
+            });
+            camposDeducciones.forEach(campo => {
+                campo.disabled = false;
+                campo.required = true;
+            });
+            pagoRentas.disabled = true;
+            pagoRentas.required = false;
 
-// Verificar si se han enviado datos por POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verificar si se ha enviado la fecha de inicio
-    if (isset($_POST["fecha_inicio"]) && !empty($_POST["fecha_inicio"])) {
-        $fechaInicio = $_POST["fecha_inicio"];
-    } else {
-        echo "La fecha de inicio no ha sido proporcionada.<br>";
-    }
+            // Logica de habilitar/deshabilitar campos
+            if (ingresoAPF.value || ingresoAPM.value) {
+                camposSubarrendamiento.forEach(campo => {
+                    campo.disabled = true;
+                    campo.required = false;
+                });
+                if (deduccionOpcional === 'si') {
+                    camposDeducciones.forEach(campo => {
+                        campo.disabled = true;
+                        campo.required = false;
+                    });
+                }
+                document.getElementById('ciega').disabled = false;
+            } else if (ingresoSPF.value || ingresoSPM.value) {
+                camposArrendamiento.forEach(campo => {
+                    campo.disabled = true;
+                    campo.required = false;
+                });
+                camposDeducciones.forEach(campo => {
+                    campo.disabled = true;
+                    campo.required = false;
+                });
+                pagoRentas.disabled = false;
+                pagoRentas.required = true;
+                document.getElementById('ciega').disabled = true;
+            }
 
-    // Verificar si se ha enviado la cantidad de días a sumar
-    if (isset($_POST["dias_sumar"]) && $_POST["dias_sumar"] > 0) {
-        $diasSumar = $_POST["dias_sumar"];
-    } else {
-        echo "La cantidad de días a sumar no es válida.<br>";
-    }
-
-    // Verificar si se han seleccionado días para no sumar
-    if (isset($_POST["dias_no_sumar"]) && !empty($_POST["dias_no_sumar"])) {
-        $diasNoSumar = $_POST["dias_no_sumar"];
-        
-        // Marcar los días inhabilitados según la selección de los checkboxes
-        foreach ($diasNoSumar as $diaNoSumar) {
-            if (isset($dias_inhabiles[$diaNoSumar])) {
-                $dias_inhabiles[$diaNoSumar] = true;
+            if (deduccionOpcional === 'si' && !(ingresoSPF.value || ingresoSPM.value)) {
+                camposDeducciones.forEach(campo => {
+                    campo.disabled = true;
+                    campo.required = false;
+                });
             }
         }
-    }
 
-    // Si todos los campos son válidos, calcular la fecha resultante
-    if (!empty($fechaInicio) && !empty($diasSumar)) {
-        $fechaResultante = sumarDiasHabiles($fechaInicio, $diasSumar, $diasNoSumar, $dias_inhabiles);
-    }
-}
-
-// Función para sumar días excluyendo ciertos días de la semana y días inhabilitados
-function sumarDiasHabiles($fechaInicio, $diasSumar, $diasNoSumar, $dias_inhabiles) {
-    $fecha = strtotime($fechaInicio);
-    $diasSumados = 0;
-
-    while ($diasSumados < $diasSumar) {
-        $fecha = strtotime('+1 day', $fecha);
-        $diaSemana = date('N', $fecha);
-        $diaMes = date('d-m-Y', $fecha);
-
-        // Verificar si el día es un día inhabilitado
-        if (isset($dias_inhabiles[$diaMes]) && $dias_inhabiles[$diaMes]) {
-            continue;
-        }
-
-        // Verificar si el día es un día a excluir
-        if (in_array($diaSemana, $diasNoSumar)) {
-            continue;
-        }
-
-        $diasSumados++;
-    }
-
-    return date('d-m-Y', $fecha);
-}
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Formulario de Suma de Fechas</title>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const inputs = document.querySelectorAll('input[type="number"], select');
+            inputs.forEach(input => {
+                input.addEventListener('input', handleInput);
+                input.addEventListener('change', handleInput); // For select element
+            });
+            handleInput(); // Para inicializar la lógica al cargar la página
+        });
+    </script>
 </head>
 <body>
-
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <label for="fecha_inicio">Fecha de inicio:</label>
-    <input type="date" id="fecha_inicio" name="fecha_inicio" value="<?php echo $fechaInicio; ?>" required><br><br>
+    <h1>ISR Ingresos por arrendamiento</h1>
+    <h3>Ingresos</h3>
+    <form method="POST" action="">
+        <label for="ingreso1">Ingresos por arrendamiento mensuales PF:</label>
+        <input type="number" id="ingreso_a_pf" name="valor1" step="0.01"><br><br>
+        
+        <label for="ingreso2">Ingresos por arrendamiento mensuales PM:</label>
+        <input type="number" id="ingreso_a_pm" name="valor2" step="0.01"><br><br>
+        
+        <label for="ingreso3">Ingresos por subarrendamiento mensuales PF:</label>
+        <input type="number" id="ingreso_s_pf" name="valor3" step="0.01"><br><br>
+        
+        <label for="ingreso4">Ingresos por subarrendamiento mensuales PM:</label>
+        <input type="number" id="ingreso_s_pm" name="valor4" step="0.01"><br><br>
     
-    <label for="dias_sumar">Días a sumar:</label>
-    <input type="number" id="dias_sumar" name="dias_sumar" min="1" value="<?php echo $diasSumar; ?>" required><br><br>
+        <h3>Deducciones</h3>
+        <label for="opcional">Deducción opcional (deducción ciega):</label>
+        <select id="ciega" name="opcional" required>
+            <option value="si">Sí</option>
+            <option value="no">No</option>
+        </select><br><br>
 
-    <div>
-    <button type="button" onclick="seleccionarDesmarcarTodas('dias_no_sumar')">Seleccionar/Desmarcar Todas</button>
-        <button type="button" onclick="mostrarOcultar('dias_no_sumar')">Mostrar/Ocultar Días a Excluir</button><br><br>    
+        <label for="deduccion5">Impuesto predial:</label>
+        <input type="number" id="i_p" name="valor5" step="0.01"><br><br> 
+        
+        <label for="deduccion6">Impuesto locales:</label>
+        <input type="number" id="i_l" name="valor6" step="0.01"><br><br>  
+        
+        <label for="deduccion7">Gastos de mantenimiento:</label>
+        <input type="number" id="g_m" name="valor7" step="0.01"><br><br>  
+        
+        <label for="deduccion8">Intereses reales pagados:</label>
+        <input type="number" id="i_r" name="valor8" step="0.01"><br><br>
+        
+        <label for="deduccion9">Salarios, comisiones y honorarios (incluyendo contribuciones):</label>
+        <input type="number" id="s_c" name="valor9" step="0.01"><br><br>  
+        
+        <label for="deduccion10">Importe de las primas de seguros:</label>
+        <input type="number" id="p_s" name="valor10" step="0.01"><br><br>  
+        
+        <label for="deduccion11">Inversiones en construcción, incluyendo adiciones y mejoras:</label>
+        <input type="number" id="i_c" name="valor11" step="0.01"><br><br>  
+        
+        <label for="deduccion12">Pago de las rentas (en caso de subarrendamiento):</label>
+        <input type="number" id="p_r" name="valor12" step="0.01"><br><br>
+        
+        <input type="submit" value="Enviar">
+    </form>
 
-        <div id="dias_no_sumar" style="display:none">
-            <label for="dias_no_sumar">Días a excluir:</label><br>
-            <input type="checkbox" id="lunes" name="dias_no_sumar[]" value="1" <?php if(in_array("1", $diasNoSumar)) echo "checked"; ?>>
-            <label for="lunes">Lunes</label><br>
-            <input type="checkbox" id="martes" name="dias_no_sumar[]" value="2" <?php if(in_array("2", $diasNoSumar)) echo "checked"; ?>>
-            <label for="martes">Martes</label><br>
-            <input type="checkbox" id="miercoles" name="dias_no_sumar[]" value="3" <?php if(in_array("3", $diasNoSumar)) echo "checked"; ?>>
-            <label for="miercoles">Miércoles</label><br>
-            <input type="checkbox" id="jueves" name="dias_no_sumar[]" value="4" <?php if(in_array("4", $diasNoSumar)) echo "checked"; ?>>
-            <label for="jueves">Jueves</label><br>
-            <input type="checkbox" id="viernes" name="dias_no_sumar[]" value="5" <?php if(in_array("5", $diasNoSumar)) echo "checked"; ?>>
-            <label for="viernes">Viernes</label><br>
-            <input type="checkbox" id="sabado" name="dias_no_sumar[]" value="6" <?php if(in_array("6", $diasNoSumar)) echo "checked"; ?>>
-            <label for="sabado">Sábado</label><br>
-            <input type="checkbox" id="domingo" name="dias_no_sumar[]" value="7" <?php if(in_array("7", $diasNoSumar)) echo "checked"; ?>>
-            <label for="domingo">Domingo</label><br><br>
-        </div>
-    </div>
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Obtener valores del formulario con valores por defecto en caso de que no estén presentes
+        $valor1 = isset($_POST['valor1']) ? $_POST['valor1'] : 0;
+        $valor2 = isset($_POST['valor2']) ? $_POST['valor2'] : 0;
+        $valor3 = isset($_POST['valor3']) ? $_POST['valor3'] : 0;
+        $valor4 = isset($_POST['valor4']) ? $_POST['valor4'] : 0;
+        $valor5 = isset($_POST['valor5']) ? $_POST['valor5'] : 0;
+        $valor6 = isset($_POST['valor6']) ? $_POST['valor6'] : 0;
+        $valor7 = isset($_POST['valor7']) ? $_POST['valor7'] : 0;
+        $valor8 = isset($_POST['valor8']) ? $_POST['valor8'] : 0;
+        $valor9 = isset($_POST['valor9']) ? $_POST['valor9'] : 0;
+        $valor10 = isset($_POST['valor10']) ? $_POST['valor10'] : 0;
+        $valor11 = isset($_POST['valor11']) ? $_POST['valor11'] : 0;
+        $valor12 = isset($_POST['valor12']) ? $_POST['valor12'] : 0;
+        $opcional = isset($_POST['opcional']) ? $_POST['opcional'] : 'no';
 
-    <div>
-        <button type="button" onclick="seleccionarDesmarcarTodas('dias_inhabiles')">Seleccionar/Desmarcar Todas</button>
-        <button type="button" onclick="mostrarOcultar('dias_inhabiles')">Mostrar/Ocultar Días Inhábiles</button><br><br>    
+        echo "<h2>Valores recibidos:</h2>";
+        echo ": $valor1 <br>";
+        echo ": $valor2 <br>";
+        echo ": $valor3 <br>";
+        echo ": $valor4 <br>";
+        echo ": $valor5 <br>";
+        echo ": $valor6 <br>";
+        echo ": $valor7 <br>";
+        echo ": $valor8 <br>";
+        echo ": $valor9 <br>";
+        echo ": $valor10 <br>";
+        echo ": $valor11 <br>";
+        echo ": $valor12 <br>";
+        echo ": $opcional <br>";
 
-        <div id="dias_inhabiles" style="display:none">
-            <label for="dias_no_sumar">Día inhabil:</label><br>
-            <input type="checkbox" id="1_de_enero" name="dias_no_sumar[]" value="<?php echo $i_enero; ?>" <?php if(in_array($i_enero, $diasNoSumar)) echo "checked"; ?>>
-            <label for="lunes">1 de enero</label><br>
-            <input type="checkbox" id="primer_lunes_febrero" name="dias_no_sumar[]" value="<?php echo $i_febrero; ?>" <?php if(in_array($i_febrero, $diasNoSumar)) echo "checked"; ?>>
-            <label for="martes">Primer lunes de febrero</label><br>
-            <input type="checkbox" id="tercer_lunes_marzo" name="dias_no_sumar[]" value="<?php echo $iii_marzo; ?>" <?php if(in_array($iii_marzo, $diasNoSumar)) echo "checked"; ?>>
-            <label for="martes">Tercer lunes de marzo</label><br>
-            <input type="checkbox" id="1_de_mayo" name="dias_no_sumar[]" value="<?php echo $i_mayo; ?>" <?php if(in_array($i_mayo, $diasNoSumar)) echo "checked"; ?>>
-            <label for="martes">1 de mayo</label><br>
-            <input type="checkbox" id="5_de_mayo" name="dias_no_sumar[]" value="<?php echo $v_mayo; ?>" <?php if(in_array($v_mayo, $diasNoSumar)) echo "checked"; ?>>
-            <label for="martes">5 de mayo</label><br>
-            <input type="checkbox" id="16_de_septiembre" name="dias_no_sumar[]" value="<?php echo $xvi_septiembre; ?>" <?php if(in_array($xvi_septiembre, $diasNoSumar)) echo "checked"; ?>>
-            <label for="martes">16 de septiembre</label><br>
-            <input type="checkbox" id="tercer_lunes_noviembre" name="dias_no_sumar[]" value="<?php echo $iii_noviembre; ?>" <?php if(in_array($iii_noviembre, $diasNoSumar)) echo "checked"; ?>>
-            <label for="martes">Tercer lunes de noviembre</label><br>
-            <input type="checkbox" id="1_de_diciembre" name="dias_no_sumar[]" value="<?php echo $i_diciembre; ?>" <?php if(in_array($i_diciembre, $diasNoSumar)) echo "checked"; ?>>
-            <label for="martes">1 de diciembre</label><br>
-            <input type="checkbox" id="25_de_diciembre" name="dias_no_sumar[]" value="<?php echo $xxv_diciembre; ?>" <?php if(in_array($xxv_diciembre, $diasNoSumar)) echo "checked"; ?>>
-            <label for="martes">25 de diciembre</label><br><br>
-        </div>
-    </div>
+        // Calcular base gravable
+        $ingreso_arrendamiento = $valor1 + $valor2;
+        $ingreso_sub = $valor3 + $valor4;
+        $deduccion_gene = $valor5 + $valor6 + $valor7 + $valor8 + $valor9 + $valor10 + $valor11;
+        $deduccion_op = $opcional === 'si' ? $ingreso_arrendamiento * 0.35 : 0;
+        $deduccion_sub = $valor12;
+        $ingreso_mes = $ingreso_arrendamiento + $ingreso_sub;
+        $deduccion_mes = $deduccion_gene + $deduccion_op + $deduccion_sub;
+        $base_gravable_m = $ingreso_mes - $deduccion_mes;
+        $base_gravable_m = floatval($base_gravable_m);
 
-    <div>
-        <input type="submit" value="Calcular Fecha Resultante">
-        <input type="button" value="Limpiar Formulario" onclick="limpiarFormulario()">
+        echo ": $base_gravable_m <br>";
 
-        <?php
-// Mostrar la fecha resultante si está definida
-if (!empty($fechaResultante)) {
-    echo "<p>La fecha resultante es: $fechaResultante</p>";
-}
-?>
-    </div>
-</form>
+        include('conexion.php');
 
-<script>
-    function seleccionarDesmarcarTodas(id) {
-        var checkboxes = document.querySelectorAll('#' + id + ' input[type=checkbox]');
-        var check = checkboxes[0].checked;
-        for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].checked = !check;
+        if ($conectar->connect_error) {
+            die("Error de conexión: " . $conectar->connect_error);
         }
-    }
 
-    function mostrarOcultar(id) {
-        var diasExcluir = document.getElementById(id);
-        if (diasExcluir.style.display === 'none') {
-            diasExcluir.style.display = 'block';
-        } else {
-            diasExcluir.style.display = 'none';
+        // Consulta a la base de datos para identificar el id
+        $busqueda_id = "SELECT id FROM tarifa WHERE ? BETWEEN limite_inferior AND limite_superior";
+
+        $stmt = $conectar->prepare($busqueda_id);
+        if ($stmt === false) {
+            die("Error en la preparación de la consulta: " . $conectar->error);
         }
-    }
 
-    function limpiarFormulario() {
-        document.getElementById('fecha_inicio').value = '';
-        document.getElementById('dias_sumar').value = '';
-        var checkboxes = document.querySelectorAll('input[type=checkbox]');
-        for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].checked = false;
+        $stmt->bind_param("i", $base_gravable_m);
+        $stmt->execute();
+        $stmt->bind_result($id);
+
+        $resultado = "";
+        while ($stmt->fetch()) {
+            $resultado .= $id;
         }
-    }
-</script>
 
+        if (empty($resultado)) {
+            $resultado = "No se encontraron resultados.";
+        }
+
+        $stmt->close();
+        $conectar->close();
+
+        // Consulta a la base de datos usando para identificar el LI
+        include('conexion.php');
+        if ($conectar->connect_error) {
+            die("Error de conexión: " . $conectar->connect_error);
+        }
+
+        $limite_inferior = "SELECT limite_inferior FROM tarifa WHERE id = ?";
+
+        $stmt = $conectar->prepare($limite_inferior);
+        if ($stmt === false) {
+            die("Error en la preparación de la consulta: " . $conectar->error);
+        }
+// $stmt->bind_param("d", $resultado) la "d" indica float y la "i" entero
+        $stmt->bind_param("d", $resultado);
+        $stmt->execute();
+        $stmt->bind_result($li);
+
+        $r_l_i = "";
+        while ($stmt->fetch()) {
+            $r_l_i .= $li;
+        }
+
+        if (empty($r_l_i)) {
+            $r_l_i = "No se encontraron resultados.";
+        }
+
+        $stmt->close();
+        $conectar->close();
+
+        // Consulta a la base de datos para identificar la tasa
+        include('conexion.php');
+        if ($conectar->connect_error) {
+            die("Error de conexión: " . $conectar->connect_error);
+        }
+
+        $tasa = "SELECT por_ciento FROM tarifa WHERE id = ?";
+
+        $stmt = $conectar->prepare($tasa);
+        if ($stmt === false) {
+            die("Error en la preparación de la consulta: " . $conectar->error);
+        }
+
+        $stmt->bind_param("d", $resultado);
+        $stmt->execute();
+        $stmt->bind_result($tasa1);
+
+        $r_tasa = "";
+        while ($stmt->fetch()) {
+            $r_tasa .= $tasa1;
+        }
+
+        if (empty($r_tasa)) {
+            $r_tasa = "No se encontraron resultados.";
+        }
+
+        $stmt->close();
+        $conectar->close();
+
+        // Consulta a la base de datos para encontrar la cuota fija
+        include('conexion.php');
+        if ($conectar->connect_error) {
+            die("Error de conexión: " . $conectar->connect_error);
+        }
+
+        $cuota_fija = "SELECT cuota_fija FROM tarifa WHERE id = ?";
+
+        $stmt = $conectar->prepare($cuota_fija);
+        if ($stmt === false) {
+            die("Error en la preparación de la consulta: " . $conectar->error);
+        }
+
+        $stmt->bind_param("d", $resultado);
+        $stmt->execute();
+        $stmt->bind_result($cuotaf);
+
+        $r_cuota_fija = "";
+        while ($stmt->fetch()) {
+            $r_cuota_fija .= $cuotaf;
+        }
+
+        if (empty($r_cuota_fija)) {
+            $r_cuota_fija = "No se encontraron resultados.";
+        }
+
+        $stmt->close();
+        $conectar->close();
+        echo ": $resultado <br>";
+        echo ": $r_l_i <br>";
+        // Calcular impuesto
+        $ex_li = $base_gravable_m - $r_l_i;
+        $impuesto_marginal = $ex_li * ($r_tasa);
+        $retención_isr = ($valor2+$valor4)* .10; 
+        $impuesto = $r_cuota_fija + $impuesto_marginal-$retención_isr;
+    ?>
+        <h2>Resultados de la base de datos:</h2>
+
+        <label for="resultado1">Base gravable:</label>
+        <input type="text" id="resultado1" value="<?php echo number_format($base_gravable_m, 2, '.', ','); ?>" readonly><br><br>
+        <label for="resultado2">Límite Inferior:</label>
+        <input type="text" id="resultado2" value="<?php echo number_format($r_l_i, 2, '.', ','); ?>" readonly><br><br>
+        <label for="resultado3">Excedente sobre Limite inferior:</label>
+        <input type="text" id="resultado3" value="<?php echo number_format($ex_li, 2, '.', ','); ?>" readonly><br><br>
+        <label for="resultado4">Tasa %:</label>
+        <input type="text" id="resultado4" value="<?php echo number_format(($r_tasa*100), 2, '.', ','). '%'; ?>" readonly><br><br>
+        <label for="resultado5">Impuesto Marginal:</label>
+        <input type="text" id="resultado5" value="<?php echo number_format($impuesto_marginal, 2, '.', ','); ?>" readonly><br><br>
+        <label for="resultado6">Cuota Fija:</label>
+        <input type="text" id="resultado6" value="<?php echo number_format($r_cuota_fija, 2, '.', ','); ?>" readonly><br><br>
+        <label for="resultado7">Impuesto ISR:</label>
+        <input type="text" id="resultado7" value="<?php echo number_format($impuesto, 2, '.', ','); ?>" readonly><br><br>
+        <label for="resultado8">Retención de ISR mensual:</label>
+        <input type="text" id="resultado8" value="<?php echo number_format($retención_isr, 2, '.', ','); ?>" readonly><br><br>
+        <label for="resultado9">Pago provisional del mes:</label>
+        <input type="text" id="resultado9" value="<?php echo number_format($impuesto, 2, '.', ','); ?>" readonly><br><br>
+
+    <?php
+    }
+    ?>
+
+    <!-- Botones para limpiar y regresar -->
+    <button onclick="document.querySelector('form').reset();">Limpiar</button>
+    <button onclick="window.history.back();">Regresar</button>
 </body>
 </html>

@@ -145,6 +145,7 @@
     <div id="resultados"></div>
     <div id="resultados2"></div>
     <div id="tabla"></div>
+
 </div>
 </body>
 </html>
