@@ -16,9 +16,6 @@ document.getElementById("seccion1").style.display = "block";
 // Primer contenedor de Financiamiento
 document.getElementById("seccion5").style.display = "block";
 
-
-
-
 function enableSection(actual, next) {
     document.getElementById(actual).style.display = "none";
     document.getElementById(next).style.display = "block";
@@ -28,8 +25,6 @@ function disableSection(actual, previous) {
     document.getElementById(actual).style.display = "none";
     document.getElementById(previous).style.display = "block";
 }
-
-
 
 // Sección 1
 function setName () {
@@ -67,12 +62,9 @@ function readData() {
                     "price": "",
                     "amount": insumo.description
                 };
-
                 costeo_json.push (newObject);
             }
         });
-
-        console.log (costeo_json);
     
         costeo_json.forEach(function(insumo, index) {
             var row = table.insertRow();
@@ -80,19 +72,14 @@ function readData() {
             var descripcionCell = row.insertCell(1);
             var cantidadCell = row.insertCell(2);
 
-            
             if (insumo.number !== null) {
                 console.log("coincidencia");
                 numeroCell.innerHTML = index + 1;  // Ajuste para mostrar el número correcto
                 descripcionCell.innerHTML = "¿Para cuántos " + name.toLowerCase() + " alcanza cada " + insumo.unit.toLowerCase() + " de " + insumo.description.toLowerCase() + "?";
                 cantidadCell.innerHTML = '<input type="number" min="0" step="1"/>';
-            } 
-            
+            }
         });
-
-        console.log(costeo_json);
 }
-
 
 // Sección 3
 function distribucion() {
@@ -109,8 +96,6 @@ function distribucion() {
                 costeo_json[i].amount = valorInput;  // Ajuste del índice del JSON
             }
         }
-    
-        console.log(JSON.stringify(costeo_json, null, 2));
 
     enableSection("seccion3", "seccion4");
 }
@@ -141,7 +126,6 @@ function costTable() {
         var cellCost = row.insertCell(4);
 
         // Asignar los valores del JSON a las celdas
-
         if (item.number == null) { // Impuestos y seguridad
 
             cellNo.textContext = "";
@@ -156,7 +140,6 @@ function costTable() {
                     costoTotal += cost;
                 }
             }
-
         } else {
             let cost = (1/item.amount * item.price);
 
@@ -171,34 +154,11 @@ function costTable() {
             previousItems.push(item);
         }
     });
-
     document.getElementById("totalCost").textContent = costoTotal.toLocaleString('en-US');;
 }
 
 
-    // Financiamiento
-// Sección 5
-/*
-function readActives() {
-    // Generamos el JSON
-    inversion_json = tableToJson("actives-table");
-
-    let data = inversion_json;
-
-    if (!Array.isArray(data)) {
-        console.error("Error: El JSON no es un array");
-        return;
-    }
-
-    let totalActivos = data.reduce((sum, item) => sum + parseFloat(item.activeValue), 0);
-    
-    document.getElementById("totalActivos").textContent = totalActivos.toLocaleString('en-US');
-    document.getElementById("totalActivosContainer").style.display = "block";
-
-    enableSection("seccion5", "seccion6");
-}
-*/
-
+// Financiamiento
 function readFinanciamientoTable(idTabla, tipo) {
     let tabla = document.getElementById(idTabla);
     let filas = tabla.rows;
@@ -228,17 +188,12 @@ function readFinanciamientoTable(idTabla, tipo) {
         }
         datos[tipo].push(objeto);
     }
-
     total_datos(tipo, `total${capitalizeFirstLetter(tipo)}Container`, `total${capitalizeFirstLetter(tipo)}`);
-
-    console.log(JSON.stringify(datos, null, 2));
-    enableSection("seccion5", "seccion6");
 }
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
 
 // Obtener valores, suma total y mostrarlo
 function total_datos(tipo, containerId, totalId) {
@@ -249,17 +204,9 @@ function total_datos(tipo, containerId, totalId) {
         return sum + (isNaN(valor) ? 0 : valor);
     }, 0);
 
-    console.log(total);
-
     document.getElementById(containerId).style.display = "block";
     document.getElementById(totalId).textContent = total.toLocaleString('en-US');
 }
-
-// Sección 7
-
-
-
-
 
 // Funciones extra
 function tableToJson(tabla) {
@@ -311,8 +258,6 @@ function tableToJson(tabla) {
                     rowData[header] = cell.innerText;
                 }
             }
-
-            
         }
 
         // Agregar el campo "amount" vacio al objeto JSON de la fila
