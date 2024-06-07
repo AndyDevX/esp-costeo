@@ -6,6 +6,7 @@ function RowInputs () {
 
     // Determinamos la tabla
     let table = document.getElementById('input-table');
+    let tbody = table.getElementsByTagName('tbody')[0];
     let newRow = document.createElement('tr');
         // Generamos el número de índice
         let newNumber = document.createElement('td');
@@ -51,5 +52,5 @@ function RowInputs () {
         newRow.appendChild(newUnit);
         newRow.appendChild(newPrice);
 
-    table.appendChild(newRow);
+    tbody.appendChild(newRow);
 }

@@ -36,7 +36,7 @@
                 <div class="box">
                     <div class="box-title"></div>
                     <div class="img-container">
-                        <a href="#">
+                        <a href="binario/index.php">
                             <img src="../assets/img/buttons/square/2.png" alt="...">
                         </a>
                     </div>

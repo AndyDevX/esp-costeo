@@ -160,40 +160,120 @@ function costTable () {
 
 
 // Financiamiento
-function readFinanciamientoTable (idTabla, tipo) {
-    let tabla = document.getElementById (idTabla);
+function readFinanciamientoTable(idTabla, tipo) {
+    // Limpiamos el campo
+    datos[tipo] = [];
+
+    let tabla = document.getElementById(idTabla);
+    if (!tabla) {
+        console.error(`Tabla con id '${idTabla}' no encontrada.`);
+        return;
+    }
+
     let filas = tabla.rows;
 
     for (let i = 1; i < filas.length; i++) { // Empezamos en 1 para omitir la fila de encabezados
         let celdas = filas[i].cells;
-        let objeto = {
-            "numero": celdas[0].innerText.trim (),
-            "descripcion": celdas[1].querySelector ('input') ? celdas[1].querySelector ('input').value.trim () : '',
-            "valor": celdas[2].querySelector ('input') ? celdas[2].querySelector ('input').value.trim () : ''
-        };
+        if (!celdas) {
+            console.error(`No se encontraron celdas en la fila ${i}.`);
+            continue;
+        }
 
-        // Opcionalmente agregar campos específicos si existen
-        if (celdas[3] && celdas[3].querySelector ('input')) {
-            objeto["años"] = celdas[3].querySelector ('input').value.trim ();
-        }
-        if (celdas[4] && celdas[4].querySelector ('input')) {
-            objeto["periodicidad"] = celdas[4].querySelector ('input').value.trim ();
-        }
-        if (celdas[5] && celdas[5].querySelector ('input')) {
-            objeto["valor_anualizado"] = celdas[5].querySelector ('input').value.trim ();
-        }
+        let objeto = {
+            "numero": celdas[0] ? celdas[0].innerText.trim() : '',
+            "descripcion": celdas[1] && celdas[1].querySelector('input') ? celdas[1].querySelector('input').value.trim() : '',
+            "valor": celdas[2] && celdas[2].querySelector('input') ? celdas[2].querySelector('input').value.trim() : '',
+            "periodicidad": celdas[3] && celdas[3].querySelector('select') ? celdas[3].querySelector('select').value.trim() : '',
+            "valor_anualizado": celdas[4] ? celdas[4].innerText.trim() : ''
+        };
 
         // Agregar el objeto al array correspondiente en datos
         if (!datos[tipo]) {
             datos[tipo] = [];
         }
-        datos[tipo].push (objeto);
+        datos[tipo].push(objeto);
     }
-    total_datos (tipo, `total${capitalizeFirstLetter (tipo)}Container`, `total${capitalizeFirstLetter (tipo)}`);
+    total_datos(tipo, `total${capitalizeFirstLetter(tipo)}Container`, `total${capitalizeFirstLetter(tipo)}`);
+
+    console.log(datos);
+
+    annualizedValue();
 }
 
-function capitalizeFirstLetter (string) {
-    return string.charAt (0).toUpperCase () + string.slice (1);
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+// OBTENER VALORES Y PERIODICIDAD DE LOS GASTOS DE OPERACIÓN PARA CALCULAR VALOR ANUALIZADO
+function annualizedValue() {
+    let tabla = document.getElementById("operatives-table");
+    let filas = tabla.rows;
+
+    // Guardamos la sumatoria
+    let totalAnualizado = 0;
+
+    for (let i = 1; i < filas.length; i++) { // Empezamos en 1 para omitir la fila de encabezados
+        let celdas = filas[i].cells;
+        
+        if (celdas.length > 4) { // Asegurarse de que hay al menos 5 celdas en la fila
+            let inputColumna3 = celdas[2].querySelector('input');
+            let selectColumna4 = celdas[3].querySelector('select');
+            
+            let valorColumna3 = inputColumna3 ? parseFloat(inputColumna3.value.trim()) : 0;
+            let valorColumna4 = selectColumna4 ? parseInt(selectColumna4.value.trim()) : 0;
+
+            console.log(`Fila ${i}, Columna 3 (input): ${valorColumna3}, Columna 4 (select): ${valorColumna4}`);
+            // Aquí puedes agregar lógica adicional para trabajar con los valores
+
+            let valorAnualizado = 0;
+
+            switch (valorColumna4) {
+                case 1:
+                    // Mensual
+                    valorAnualizado = valorColumna3 * 12;
+                    break;
+                case 2:
+                    // Bimestral
+                    valorAnualizado = valorColumna3 * 6;
+                    break;
+                case 3:
+                    // Trimestral
+                    valorAnualizado = valorColumna3 * 4;
+                    break;
+                case 4:
+                    // Cuatrimestral
+                    valorAnualizado = valorColumna3 * 3;
+                    break;
+                case 5:
+                    // Semestral
+                    valorAnualizado = valorColumna3 * 2;
+                    break;
+                case 6:
+                    // Anual
+                    valorAnualizado = valorColumna3;
+                    break;
+                default:
+                    console.error(`Periodicidad no válida en fila ${i}.`);
+            }
+
+            // Agregamos a la sumatoria
+            totalAnualizado += valorAnualizado;
+
+            // Asignar el valor anualizado a la columna 5
+            if (celdas[4]) {
+                celdas[4].innerText = valorAnualizado.toFixed(2);
+            } else {
+                console.error(`La fila ${i} no tiene la celda de la columna 5.`);
+            }
+
+        } else {
+            console.error(`La fila ${i} no tiene suficientes celdas.`);
+        }
+    }
+
+    document.getElementById ("totalOperativosContainer").style.display = "block";
+
+    document.getElementById ("totalOperativos").textContent = totalAnualizado.toLocaleString ('en-US');
 }
 
 // Obtener valores, suma total y mostrarlo
