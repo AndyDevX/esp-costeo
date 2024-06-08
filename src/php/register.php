@@ -2,12 +2,18 @@
     // Conexión a la BD
     include ("conexion.php");
 
+
     // Verificar el envío del formulario
     if ($_SERVER ["REQUEST_METHOD"] == "POST") {
         $username = $connection -> real_escape_string (trim ($_POST ["username"]));
         $email = $connection -> real_escape_string (trim ($_POST ["email"]));
         $password = $connection -> real_escape_string (trim ($_POST ["password"]));
         $password_confirmation = $connection -> real_escape_string (trim ($_POST['confirm_password']));
+
+        if (empty($username) || empty($email) || empty($password) || empty($password_confirmation)) {
+            echo "<script>alert ('Por favor, completa todos los campos.');history.back();</script>";
+            exit;
+        }
 
         // Comparar contraseñas
         if ($password !== $password_confirmation) {

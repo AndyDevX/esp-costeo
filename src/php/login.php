@@ -4,12 +4,17 @@
 
     if ($_SERVER ["REQUEST_METHOD"] == "POST") {
         // Sanitize and validate inputs
-        $username = $connection -> real_escape_string (trim ($_POST ["username"]));
+        $email = $connection -> real_escape_string (trim ($_POST ["email"]));
         $password = $connection -> real_escape_string (trim ($_POST ["password"]));
 
+        if (empty($email) || empty($password)) {
+            echo "<script>alert ('Por favor, completa todos los campos.');history.back();</script>";
+            exit;
+        }
+
         // Comprobar existencia del usuario usando una consulta preparada
-        $statement = $connection -> prepare ("SELECT id, username, password FROM users WHERE username = ?");
-        $statement -> bind_param ("s", $username);
+        $statement = $connection -> prepare ("SELECT id, username, password FROM users WHERE email = ?");
+        $statement -> bind_param ("s", $email);
         $statement -> execute ();
         $result_check_user = $statement -> get_result ();
 
@@ -25,8 +30,8 @@
                 // Inicio de sesión correcto
                 $_SESSION ['loggedin'] = true;
                 $_SESSION ['id'] = $user_data ['id'];
-                $_SESSION ['username'] = $user_data ['username'];
-                header ("location: welcome.php");
+                $_SESSION ['email'] = $user_data ['email'];
+                header ("location: ../../public/menu.php");
                 exit;
             } else {
                 echo "<script>alert ('La contraseña es incorrecta.');history.back();</script>";
