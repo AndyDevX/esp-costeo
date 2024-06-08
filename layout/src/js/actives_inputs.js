@@ -41,6 +41,16 @@ function RowActives() {
         newInputLife.setAttribute('min', '0');
     newLife.setAttribute('class', 'columna4');
 
+    // Creamos la celda para el porcentaje de depreciación
+    let newDepreciation = document.createElement('td');
+        // 
+    newDepreciation.setAttribute('class', 'columna5');
+
+    // Creamos la celda para el valor de la depreciación
+    let newDepreciationValue = document.createElement('td');
+        // 
+    newDepreciationValue.setAttribute('class', 'columna6');
+
     // Anidamos los elementos
     newDescription.appendChild(newInputDescription);
     newValue.appendChild(newInputValue);
@@ -50,6 +60,8 @@ function RowActives() {
     newRow.appendChild(newDescription);
     newRow.appendChild(newValue);
     newRow.appendChild(newLife);
+    newRow.appendChild(newDepreciation);
+    newRow.appendChild(newDepreciationValue);
 
     table.appendChild(newRow);
 }

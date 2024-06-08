@@ -129,13 +129,19 @@ body, html {
             width: 5%;
         }
         .columna2 {
-            width: 65%;
+            width: 55%;
         }
         .columna3 {
             width: 15%;
         }
         .columna4 {
-            width: 15%;
+            width: 10%;
+        }
+        .columa5 {
+            width: 5%;
+        }
+        .columna6 {
+            width: 10%;
         }
     }
 

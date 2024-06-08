@@ -197,7 +197,34 @@ function readFinanciamientoTable(idTabla, tipo) {
 
     console.log(datos);
 
-    annualizedValue();
+    // Ejecutar la función solo para operativos
+    if (tipo === "operativos") {
+        annualizedValue();
+    }
+    if (tipo === "activos") {
+        calcularDepreciacion();
+    }
+}
+
+
+function calcularDepreciacion() {
+    let tabla = document.getElementById("actives-table");
+
+    for (let i = 1; i < tabla.rows.length; i++) {
+        let row = tabla.rows[i];
+
+        // Leer los datos
+        let valor = parseFloat(row.cells[2].getElementsByTagName("input")[0].value);
+        let años = parseInt(row.cells[3].getElementsByTagName("input")[0].value)
+
+        // Obtener el porcentaje de depreciación
+        let porcentaje = (1 / años);
+        let depreciacionAnual = (porcentaje * valor);
+
+        // Mostrar los resultados
+        row.cells[4].innerText = (porcentaje * 100).toFixed(2);
+        row.cells[5].innerText = depreciacionAnual.toFixed(2);
+    }
 }
 
 function capitalizeFirstLetter(string) {
