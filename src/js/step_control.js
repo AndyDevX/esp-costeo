@@ -203,6 +203,7 @@ function readFinanciamientoTable(idTabla, tipo) {
     }
     if (tipo === "activos") {
         calcularDepreciacion();
+        totalDepreciacion();
     }
 }
 
@@ -225,6 +226,21 @@ function calcularDepreciacion() {
         row.cells[4].innerText = (porcentaje * 100).toFixed(2);
         row.cells[5].innerText = depreciacionAnual.toFixed(2);
     }
+}
+
+function totalDepreciacion() {
+    let tabla = document.getElementById("actives-table");
+    let total = 0;
+
+    for (let i = 1; i < tabla.rows.length; i++) {
+        let row = tabla.rows[i];
+        total += parseFloat(row.cells[5].innerText);
+    }
+    
+    // Mostrar el resultado de la sumatoria
+    document.getElementById ("totalDepreciacionContainer").style.display = "block";
+    document.getElementById ("totalDepreciacion").innerText = total.toLocaleString ('en-US');
+    //document.getElementById("totalDepreciacion").innerText = total.toFixed(2);
 }
 
 function capitalizeFirstLetter(string) {
