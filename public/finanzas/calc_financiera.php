@@ -1,3 +1,6 @@
+<?php
+    include ("../../src/php/session_check.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,8 +118,11 @@
 
                         <div class="custom-button-group">
                             <button onclick="RowActives()" class="btn btn-primary btn-sm">Nuevo activo</button>
-                            <button onclick="enableSection('seccion5', 'seccion6'), readFinanciamientoTable('actives-table', 'activos')" class="btn btn-primary btn-sm">Confirmar activos</button>
+                            <button onclick="openSection('seccion6'), readFinanciamientoTable('actives-table', 'activos')" class="btn btn-primary btn-sm">Confirmar activos</button>
                         </div>
+
+                        <p class="h5" id="totalActivosContainer" style="display: none;">Suma de inversión requerida en activos: $<span id="totalActivos"></span></p>
+                        <p class="h5" id="totalDepreciacionContainer" style="display: none;">Total de depreciación anual de activos: $<span id="totalDepreciacion"></span></p>
                     </div>
 
                     <div id="seccion6" class="section">
@@ -133,9 +139,10 @@
 
                         <div class="custom-button-group">
                             <button onclick="RowPreoperatives()" class="btn btn-primary btn-sm">Nuevo gasto preoperativo</button>
-                            <button onclick="enableSection('seccion6', 'seccion7'), readFinanciamientoTable('preoperatives-table', 'preoperativos')" class="btn btn-primary btn-sm">Confirmar gastos preoperativos</button>
-                            <button onclick="disableSection('seccion6', 'seccion5')" class="btn btn-primary btn-sm">Volver</button>
+                            <button onclick="openSection('seccion7'), readFinanciamientoTable('preoperatives-table', 'preoperativos')" class="btn btn-primary btn-sm">Confirmar gastos preoperativos</button>
                         </div>
+
+                        <p class="h5" id="totalPreoperativosContainer" style="display: none;">Suma de gastos preoperativos: $<span id="totalPreoperativos"></span></p>
                     </div>
 
                     <div id="seccion7" class="section">
@@ -156,16 +163,10 @@
                         <div class="custom-button-group">
                             <button onclick="RowOperatives()" class="btn btn-primary btn-sm">Nuevo gasto de operación</button>
                             <button onclick="readFinanciamientoTable('operatives-table', 'operativos')" class="btn btn-primary btn-sm">Confirmar gastos de operación</button>
-                            <button onclick="disableSection('seccion7', 'seccion6')" class="btn btn-primary btn-sm">Modificar gastos preoperativos</button>
                         </div>
                     </div>
 
-                    <p class="h5" id="totalActivosContainer" style="display: none;">Suma de inversión requerida en activos: $<span id="totalActivos"></span></p>
-                    <p class="h5" id="totalDepreciacionContainer" style="display: none;">Total de depreciación anual de activos: $<span id="totalDepreciacion"></span></p>
-                    <p class="h5" id="totalPreoperativosContainer" style="display: none;">Suma de gastos preoperativos: $<span id="totalPreoperativos"></span></p>
                     <p class="h5" id="totalOperativosContainer" style="display: none;">Suma de gastos de operación: $<span id="totalOperativos"></span></p>
-
-                    <!-- Dejar tablas con depreciación para vista -->
                 </div>
 
                 <hr>

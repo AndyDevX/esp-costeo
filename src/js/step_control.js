@@ -240,7 +240,17 @@ function totalDepreciacion() {
     // Mostrar el resultado de la sumatoria
     document.getElementById ("totalDepreciacionContainer").style.display = "block";
     document.getElementById ("totalDepreciacion").innerText = total.toLocaleString ('en-US');
-    //document.getElementById("totalDepreciacion").innerText = total.toFixed(2);
+}
+
+function openSection(sectionID) {
+    let section = document.getElementById(sectionID);
+
+    section.style.display = "block";
+}
+
+function closeSection(sectionID) {
+    let section = document.getElementById(sectionID);
+    section.style.display = "none";
 }
 
 function capitalizeFirstLetter(string) {

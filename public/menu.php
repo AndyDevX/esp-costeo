@@ -1,5 +1,5 @@
 <?php
-    include ("../src/php/session_check.php");
+    //include ("../src/php/session_check.php");
 ?>
 
 <!DOCTYPE html>
@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú herramientas</title>
+    <link rel="shortcut icon" href="../assets/img/esp-logo.jpeg" type="image/x-icon">
     <!-- Estilos propios -->
     <link rel="stylesheet" href="../assets/css/menu.css">
 
@@ -19,12 +20,12 @@
 <body>
     <div class="bg-image d-flex justify-content-center align-items-center" id="menu-tools">
         <div class="custom-container text-center" id="form-container">
-            <img src="../assets/img/microsoft.png" alt="Mayasoft">
+            <img src="../assets/img/esp-banner.jpeg" alt="Mayasoft">
             <p class="h1 mb-3" id="form-title">Herramientas</p>
 
             <div class="card-list-container">
                 <div class="box">
-                    <div class="box-title"></div>
+                    
                     <div class="img-container">
                         <a href="#">
                             <img src="../assets/img/buttons/square/1.png" alt="...">
@@ -34,7 +35,7 @@
                 </div>
 
                 <div class="box">
-                    <div class="box-title"></div>
+                    
                     <div class="img-container">
                         <a href="binario/index.php">
                             <img src="../assets/img/buttons/square/2.png" alt="...">
@@ -44,9 +45,9 @@
                 </div>
                 
                 <div class="box">
-                    <div class="box-title"></div>
+                    
                     <div class="img-container">
-                        <a href="finanzas/calc_financiera.html">
+                        <a href="finanzas/calc_financiera.php">
                             <img src="../assets/img/buttons/square/3.png" alt="...">
                         </a>
                     </div>
@@ -54,8 +55,8 @@
                 </div>
 
                 <div class="box">
-                    <div class="box-title">
-                    </div>
+                    
+                    
                     <div class="img-container">
                         <a href="#">
                             <img src="../assets/img/buttons/square/4.png" alt="...">
