@@ -1,5 +1,6 @@
 <?php
     include ("../../src/php/conexion.php");
+    include ("modules/umi.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,40 +20,39 @@
 <body>
     <div class="bg-image d-flex justify-content-center align-items-center" id="menu-tools">
         <div class="custom-container text-center">
+
+        <button class="btn btn-primary" id="top-back" onclick="window.location.href='../menu.php';">Volver</button>
+
             <div class="content">
                 
                 <p class="h1">Indicadores</p>
-
                 <div class="row">
-                    <div class="col">
+
+                    <div class="section">
                         <p class="h3">Unidad Mixtra Infonavit</p>
-                        <?php include("modules/umi.php"); ?>
-                    </div>
-                    <div class="col">
-                        <p class="h3">Whatever</p>
-                        <table class="custTable">
-                            <tr>
-                                <th>#</th>
-                                <th>Prueba</th>
-                                <th>Nothing</th>
-                                <th>Whatever</th>
-                                <th>Anythinh</th>
-                                <th>I dont know</th>
-                                <th>Something else</th>
-                            </tr>
+                        <!-- TABLA DE UMI -->
+                        <table id="UMItable" class="custTable">
+                            <thead>
+                                <tr>
+                                    <th class="columna1">#</th>
+                                    <th class="columna2">Año</th>
+                                    <th class="columna3">UMI</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <?php getData($connection) ?>
+                            </tbody>
                         </table>
                     </div>
+
+                    <div class="section">
+                        Hola
+                    </div>
+
                 </div>
 
-                <div class="row">
-                    <div class="col">col</div>
-                    <div class="col">col</div>
-                </div>
-
-                <div class="row">
-                    <div class="col">col</div>
-                    <div class="col">col</div>
-                </div>
+                
 
             </div>
         </div>

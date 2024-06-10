@@ -1,6 +1,4 @@
 <?php
-    
-
     function getData($connection) {
         // Preparar la consulta
         $statement = $connection -> prepare("SELECT * FROM umi");
@@ -30,20 +28,5 @@
         // Cerrar la consulta y la conexión
         $statement->close();
         $connection->close();
-    }
-    
+    }  
 ?>
-
-<table class="custTable">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Año</th>
-            <th>UMI</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <?php getData($connection); ?>
-    </tbody>
-</table>

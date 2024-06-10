@@ -37,6 +37,7 @@ body, html {
     padding: 65px 30px 30px;
     margin: 25px auto;
     max-width: 950px;
+    width: 100%;
     color: white;
     border-radius: 10px;
 
@@ -109,99 +110,16 @@ body, html {
         }
     }
 
-    #input-table {
+    #UMItable {
         .columna1 {
-            width: 5%;
-        }
-        .columna2 {
-            width: 55%;
-        }
-        .columna3 {
-            width: 30%;
-        }
-        .columna4 {
             width: 10%;
         }
-    }
 
-    #actives-table {
-        .columna1 {
-            width: 5%;
-        }
         .columna2 {
-            width: 55%;
+            width: 45%;
         }
         .columna3 {
-            width: 15%;
-        }
-        .columna4 {
-            width: 10%;
-        }
-        .columa5 {
-            width: 5%;
-        }
-        .columna6 {
-            width: 10%;
-        }
-    }
-
-    #tabla-prorrateo {
-        .columna1 {
-            width: 5%;
-        }
-        .columna2 {
-            width: 85%;
-        }
-        .columna3 {
-            width: 10%;
-        }
-    }
-
-    #tabla-costeo {
-        .columna1 {
-            width: 5%;
-        }
-        .columna2 {
-            width: 30%;
-        }
-        .columna3 {
-            width: 25%;
-        }
-        .columna4 {
-            width: 25%;
-        }
-        .columna5 {
-            width: 15%;
-        }
-    }
-
-    #preoperatives-table {
-        .columna1 {
-            width: 1%;
-        }
-        .columna2 {
-            width: 95%;
-        }
-        .columna3 {
-            width: 4%;
-        }
-    }
-
-    #operatives-table {
-        .columna1 {
-            width: 5%;
-        }
-        .columna2 {
-            width: 40%;
-        }
-        .columna3 {
-            width: 5%;
-        }
-        .columna4 {
-            width: 40%;
-        }
-        .columna5 {
-            width: 10%;
+            width: 45%;
         }
     }
 }
@@ -217,8 +135,4 @@ body, html {
     top: 1rem;
     left: 1rem;
     width: 6rem;
-}
-
-.section {
-    display: none;
 }
