@@ -1,7 +1,7 @@
 <?php
-    function getUMI($connection) {
+    function getUMA($connection) {
         // Preparar la consulta
-        $statement = $connection -> prepare("SELECT * FROM umi");
+        $statement = $connection -> prepare("SELECT * FROM uma");
 
         if ($statement === false) {
             die("Error al preparar la búsqueda: ".$connection -> error);
@@ -18,7 +18,9 @@
                 echo "<tr>
                     <td class='columna1'>".$row['id']."</td>
                     <td class='columna2'>".$row['año']."</td>
-                    <td class='columna3'>".$row['umi']."</td>
+                    <td class='columna3'>".$row['diario']."</td>
+                    <td class='columna3'>".$row['mensual']."</td>
+                    <td class='columna3'>".$row['anual']."</td>
                 </tr>";
             }
         } else {

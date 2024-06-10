@@ -109,8 +109,15 @@ body, html {
             border: solid 1px rgb(104, 104, 104);
         }
     }
+    tr:hover {
+        background-color: aqua;
+    }
 
     #UMItable {
+        tr:hover {
+            background-color: azure;
+        }
+
         .columna1 {
             width: 10%;
         }

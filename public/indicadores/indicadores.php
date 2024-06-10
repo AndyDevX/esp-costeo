@@ -1,9 +1,10 @@
 <?php
     include ("../../src/php/conexion.php");
+    include ("modules/uma.php");
     include ("modules/umi.php");
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +30,7 @@
                 <div class="row">
 
                     <div class="section">
-                        <p class="h3">Unidad Mixtra Infonavit</p>
+                        <p class="h3">Unidad Mixta Infonavit</p>
                         <!-- TABLA DE UMI -->
                         <table id="UMItable" class="custTable">
                             <thead>
@@ -41,13 +42,32 @@
                             </thead>
 
                             <tbody>
-                                <?php getData($connection) ?>
+                                <?php
+                                    getUMI($connection);
+                                ?>
                             </tbody>
                         </table>
                     </div>
 
                     <div class="section">
-                        Hola
+                        <p class="h3 mt-3">Unidad de Medida y Actualización</p>
+                        <!-- TABLA DE UMA -->
+                        <table id="UMAtable" class="custTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Año</th>
+                                    <th>Diario</th>
+                                    <th>Mensual</th>
+                                    <th>Anual</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    getUMA($connection);
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
