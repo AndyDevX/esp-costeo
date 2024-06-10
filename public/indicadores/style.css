@@ -109,14 +109,24 @@ body, html {
             border: solid 1px rgb(104, 104, 104);
         }
     }
-    tr:hover {
-        background-color: aqua;
+
+    tbody {
+        
+        tr:hover {
+            background-color: rgb(25, 23, 151);
+            color: #a3a3a3;
+        }
+    
+        td:hover {
+            background-color: rgb(75, 136, 228);
+            color: black;
+            font-weight: bold;
+        }
     }
 
+    
+
     #UMItable {
-        tr:hover {
-            background-color: azure;
-        }
 
         .columna1 {
             width: 10%;
@@ -128,6 +138,10 @@ body, html {
         .columna3 {
             width: 45%;
         }
+    }
+
+    #INPCtable {
+        width: 100%;
     }
 }
 

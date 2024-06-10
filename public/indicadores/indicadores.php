@@ -1,7 +1,6 @@
 <?php
     include ("../../src/php/conexion.php");
-    include ("modules/uma.php");
-    include ("modules/umi.php");
+    include ("modules/getData.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -35,9 +34,8 @@
                         <table id="UMItable" class="custTable">
                             <thead>
                                 <tr>
-                                    <th class="columna1">#</th>
-                                    <th class="columna2">Año</th>
-                                    <th class="columna3">UMI</th>
+                                    <th>Año</th>
+                                    <th>UMI</th>
                                 </tr>
                             </thead>
 
@@ -55,7 +53,6 @@
                         <table id="UMAtable" class="custTable">
                             <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>Año</th>
                                     <th>Diario</th>
                                     <th>Mensual</th>
@@ -70,10 +67,82 @@
                         </table>
                     </div>
 
+                    <div class="section">
+                        <p class="h3 mt-3">Retención de interés</p>
+                        <!-- TABLA DE RETENCIÓN INTERÉS -->
+                        <table id="RetencionInteresTable" class="custTable">
+                            <thead>
+                                <tr>
+                                    <th>Año</th>
+                                    <th>Tasa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    getRetencionInteres($connection);
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="overflow-x: scroll;" class="section">
+                        <p class="h3 mt-3">Índice Nacional de Precios al Consumidor</p>
+                        <!-- TABLA DE INPC -->
+
+                        <table id="INPCtable" class="custTable">
+                            <thead>
+                                <tr>
+                                    <th>Año</th>
+                                    <th>Enero</th>
+                                    <th>Febrero</th>
+                                    <th>Marzo</th>
+                                    <th>Abril</th>
+                                    <th>Mayo</th>
+                                    <th>Junio</th>
+                                    <th>Julio</th>
+                                    <th>Agosto</th>
+                                    <th>Septiembre</th>
+                                    <th>Octubre</th>
+                                    <th>Noviembre</th>
+                                    <th>Diciembre</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inpcBody">
+                                <?php getINPC($connection); ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <div style="overflow-x: scroll;" class="section">
+                        <p class="h3 mt-3">Recargos</p>
+                        <!-- TABLA DE RECARGOS -->
+
+                        <table id="recargosTable" class="custTable">
+                            <thead>
+                                <tr>
+                                    <th>Año</th>
+                                    <th>Enero</th>
+                                    <th>Febrero</th>
+                                    <th>Marzo</th>
+                                    <th>Abril</th>
+                                    <th>Mayo</th>
+                                    <th>Junio</th>
+                                    <th>Julio</th>
+                                    <th>Agosto</th>
+                                    <th>Septiembre</th>
+                                    <th>Octubre</th>
+                                    <th>Noviembre</th>
+                                    <th>Diciembre</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recargosBody">
+                                <?php getRecargos($connection); ?>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
-
-                
-
             </div>
         </div>
     </div>
