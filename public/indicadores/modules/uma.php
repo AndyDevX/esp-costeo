@@ -17,7 +17,7 @@
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>
                     <td class='columna1'>".$row['id']."</td>
-                    <td class='columna2'>".$row['año']."</td>
+                    <td class='columna2'>".$row['year']."</td>
                     <td class='columna3'>".$row['diario']."</td>
                     <td class='columna3'>".$row['mensual']."</td>
                     <td class='columna3'>".$row['anual']."</td>
