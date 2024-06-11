@@ -26,7 +26,7 @@
             <div class="card-list-container">
                 <div class="box">
                     <div class="img-container">
-                        <a href="#">
+                        <a href="fiscal/seleccionador.php">
                             <img src="../assets/img/buttons/square/1.png" alt="...">
                         </a>
                     </div>
@@ -67,6 +67,15 @@
                         </a>
                     </div>
                     <p>Indicadores</p>
+                </div>
+                
+                <div class="box">
+                    <div class="img-container">
+                        <a href="plazos/calculadora_fecha.php">
+                            <img src="../assets/img/buttons/square/#" alt="...">
+                        </a>
+                    </div>
+                    <p>Calculadora de plazo</p>
                 </div>
                 
             </div>

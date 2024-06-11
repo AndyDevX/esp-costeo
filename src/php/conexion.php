@@ -1,7 +1,7 @@
 <?php
     $host = "localhost:3306";
-    $user = "root";
-    $pass = "";
+    $user = "esp_db_admin";
+    $pass = "KmRqxGUtHVLs";
     $db = "calculadora_inpc";
 
     $connection = new mysqli ($host, $user, $pass, $db);
