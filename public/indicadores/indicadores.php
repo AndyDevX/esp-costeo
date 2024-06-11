@@ -7,7 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Indicadores</title>
+
+    <link rel="shortcut icon" href="../../assets/img/esp-logo.jpeg" type="image/x-icon">
 
     <!-- Estilos propios -->
     <link rel="stylesheet" href="style.css">

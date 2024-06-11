@@ -7,6 +7,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora financiera</title>
+    
+    <link rel="shortcut icon" href="../../assets/img/esp-logo.jpeg" type="image/x-icon">
+    
     <!-- Estilos propios -->
     <link rel="stylesheet" href="style.css">
 
