@@ -1,5 +1,5 @@
 <?php
-    //include ("../src/php/session_check.php");
+    include ("../src/php/session_check.php");
 ?>
 
 <!DOCTYPE html>

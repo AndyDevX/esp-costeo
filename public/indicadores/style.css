@@ -97,6 +97,7 @@ body, html {
     width: 100%;
     background-color: rgb(61, 61, 61);
     margin-bottom: 10px;
+    color: white;
 
     tr {
         border: solid 1px rgb(104, 104, 104);
@@ -107,6 +108,7 @@ body, html {
 
         td {
             border: solid 1px rgb(104, 104, 104);
+            padding: 10px;
         }
     }
 
