@@ -1,3 +1,0 @@
-- Devolver costeo unitario como variable : costeo.php
-
-- Devolver inversión desglozada (JSON) : inversion.php
