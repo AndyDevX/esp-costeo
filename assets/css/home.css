@@ -1,0 +1,66 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgb(53, 51, 204);
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(25, 23, 151);
+}
+::-webkit-scrollbar-track {
+    background-color: rgb(21, 28, 33);
+}
+
+/* Fondo */
+.bg-image {
+    background-image: url("../../assets/img/white_bg2.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Contenedor principal */
+.custom-container {
+    background-color: rgba(40, 40, 40, 0.7); /* Fondo oscuro semi-transparente */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 30px;
+    margin: 50px auto; /* Margen superior e inferior de 50px, centrado horizontalmente */
+    max-width: 600px; /* Ajusta esto según tus necesidades */
+    color: white;
+    border-radius: 10px;
+
+    img {
+        width: 40%;
+    }
+
+    input {
+        background-color: rgb(21, 21, 21);
+        width: 100%;
+        margin-bottom: 15px;
+        color: rgb(155, 155, 155);
+        border: none;
+    }
+
+    input:focus {
+        background-color: #3b3b3b;
+        color: white;
+    }
+
+    input::placeholder {
+        color: rgb(82, 82, 82);
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        background-color: rgb(53, 51, 204);
+    }
+}
